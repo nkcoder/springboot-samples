@@ -5,7 +5,7 @@ import static org.springframework.boot.test.context.SpringBootTest.WebEnvironmen
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.nkcoder.domain.Car;
+import org.nkcoder.domain.Employee;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.client.TestRestTemplate;
@@ -22,12 +22,12 @@ public class IntegrationTest {
 
   @Test
   public void getEmployee_shouldReturnEmployee() {
-    // arrange
 
-    // act
-
-    // test
-    ResponseEntity<Car> response = testRestTemplate.getForEntity("/employees/daniel", Car.class);
+    ResponseEntity<Employee> response = testRestTemplate.getForEntity(
+        "/employees/{name}",
+        Employee.class,
+        "daniel"
+    );
 
     assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
     assertThat(response.getBody().getName()).isEqualTo("daniel");
