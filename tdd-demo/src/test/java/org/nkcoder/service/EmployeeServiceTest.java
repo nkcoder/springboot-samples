@@ -1,20 +1,20 @@
 package org.nkcoder.service;
 
-import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.BDDMockito.given;
 
 import org.assertj.core.api.SoftAssertions;
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
-import org.mockito.junit.MockitoJUnitRunner;
 import org.nkcoder.domain.Employee;
 import org.nkcoder.exception.EmployeeNotFoundException;
 import org.nkcoder.repo.EmployeeRepository;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
 
-@RunWith(MockitoJUnitRunner.class)
+@ExtendWith(SpringExtension.class)
 public class EmployeeServiceTest {
 
   @Mock
@@ -22,7 +22,7 @@ public class EmployeeServiceTest {
 
   private EmployeeService employeeService;
 
-  @Before
+  @BeforeEach
   public void setUp() {
     employeeService = new EmployeeService(employeeRepository);
   }
@@ -42,11 +42,11 @@ public class EmployeeServiceTest {
 
   }
 
-  @Test(expected = EmployeeNotFoundException.class)
+  @Test
   public void getEmployee_notFound() {
     given(employeeRepository.findByName(anyString())).willReturn(null);
 
-    employeeService.getEmployee("notExist");
+    assertThrows(EmployeeNotFoundException.class, () -> employeeService.getEmployee("notExist"));
 
   }
 
