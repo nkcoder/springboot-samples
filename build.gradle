@@ -1,0 +1,47 @@
+buildscript {
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:2.0.5.RELEASE")
+    }
+}
+
+allprojects {
+    apply plugin: 'java'
+    apply plugin: 'idea'
+    apply plugin: 'org.springframework.boot'
+    apply plugin: 'io.spring.dependency-management'
+
+    group 'org.nkcoder'
+    version '1.0'
+
+
+    repositories {
+        mavenCentral()
+    }
+
+    dependencies {
+        implementation("org.springframework.boot:spring-boot-starter-web:2.1.4.RELEASE")
+
+        testImplementation('org.springframework.boot:spring-boot-starter-test:2.1.4.RELEASE')
+
+    }
+
+    sourceCompatibility = 1.8
+    targetCompatibility = 1.8
+}
+
+subprojects {
+    dependencies {
+
+    }
+
+}
+
+
+//bootJar {
+//    baseName = 'springboot-demo'
+//    version =  '0.1.0'
+//}
+
