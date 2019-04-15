@@ -1,8 +1,11 @@
 package org.nkcoder.service;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.BDDMockito.given;
+import static org.mockito.Mockito.when;
 
 import org.assertj.core.api.SoftAssertions;
 import org.junit.jupiter.api.BeforeEach;
@@ -50,4 +53,16 @@ public class EmployeeServiceTest {
 
   }
 
+  @Test
+  public void saveEmployee_returnSavedEmployee() {
+    Employee employee = new Employee("daniel", "senior");
+    when(employeeRepository.save(any(Employee.class))).thenReturn(employee);
+
+    Employee employeeSaved = employeeService.saveEmployee(employee);
+
+    assertThat(employeeSaved).isNotNull();
+    assertThat(employeeSaved.getName()).isEqualTo(employee.getName());
+    assertThat(employeeSaved.getGrade()).isEqualTo(employee.getGrade());
+
+  }
 }

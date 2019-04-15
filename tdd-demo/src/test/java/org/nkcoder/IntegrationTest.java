@@ -21,17 +21,32 @@ public class IntegrationTest {
   private TestRestTemplate testRestTemplate;
 
   @Test
-  public void getEmployee_shouldReturnEmployee() {
+  public void saveEmployee_thenGetEmployee_shouldReturnEmployee() {
+    Employee employee = new Employee("lebrown", "chief");
 
-    ResponseEntity<Employee> response = testRestTemplate.getForEntity(
-        "/employees/{name}",
-        Employee.class,
-        "daniel"
+    ResponseEntity<Employee> postResponse = testRestTemplate.postForEntity(
+        "/employees",
+        employee,
+        Employee.class
     );
 
-    assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
-    assertThat(response.getBody().getName()).isEqualTo("daniel");
-    assertThat(response.getBody().getGrade()).isEqualTo("junior");
+    assertThat(postResponse.getStatusCode()).isEqualTo(HttpStatus.OK);
+    assertThat(postResponse.getBody()).isNotNull();
+    assertThat(postResponse.getBody().getName()).isEqualTo(employee.getName());
+    assertThat(postResponse.getBody().getGrade()).isEqualTo(employee.getGrade());
+
+    //===================================================================
+
+    ResponseEntity<Employee> getResponse = testRestTemplate.getForEntity(
+        "/employees/{name}",
+        Employee.class,
+        employee.getName()
+    );
+
+    assertThat(getResponse.getStatusCode()).isEqualTo(HttpStatus.OK);
+    assertThat(getResponse.getBody()).isNotNull();
+    assertThat(getResponse.getBody().getName()).isEqualTo(employee.getName());
+    assertThat(getResponse.getBody().getGrade()).isEqualTo(employee.getGrade());
 
   }
 

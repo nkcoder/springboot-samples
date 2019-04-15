@@ -2,6 +2,7 @@ package org.nkcoder.repo;
 
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.not;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -30,6 +31,25 @@ public class EmployeeRepositoryTest {
     assertThat(employee).isNotNull();
     assertThat(employee.getName()).isEqualTo(employeeSaved.getName());
     assertThat(employee.getGrade()).isEqualTo(employeeSaved.getGrade());
+
+  }
+
+  @Test
+  public void getEmployee_whenNotFound_returnNull() {
+    Employee notExist = employeeRepository.findByName("notExist");
+    assertThat(notExist).isNull();
+  }
+
+  @Test
+  public void saveEmployee_returnSavedEmployee() {
+    Employee employee = new Employee("daniel", "principal");
+    Employee employeeSaved = employeeRepository.save(employee);
+
+    entityManager.flush();
+
+    assertThat(employeeSaved).isNotNull();
+    assertThat(employeeSaved.getName()).isEqualTo(employee.getName());
+    assertThat(employeeSaved.getGrade()).isEqualTo(employee.getGrade());
 
   }
 

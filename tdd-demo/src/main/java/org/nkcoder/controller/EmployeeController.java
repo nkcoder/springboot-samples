@@ -5,6 +5,8 @@ import org.nkcoder.exception.EmployeeNotFoundException;
 import org.nkcoder.service.EmployeeService;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -25,6 +27,11 @@ public class EmployeeController {
     }
 
     return employee;
+  }
+
+  @PostMapping("/employees")
+  public Employee saveEmployee(@RequestBody Employee employee) {
+    return employService.saveEmployee(employee);
   }
 
 }

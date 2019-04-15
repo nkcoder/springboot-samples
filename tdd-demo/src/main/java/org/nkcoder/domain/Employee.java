@@ -1,5 +1,7 @@
 package org.nkcoder.domain;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -20,7 +22,8 @@ public class Employee {
   public Employee() {
   }
 
-  public Employee(String name, String grade) {
+  @JsonCreator
+  public Employee(@JsonProperty("name") String name, @JsonProperty("grade") String grade) {
 
     this.name = name;
     this.grade = grade;
@@ -32,14 +35,6 @@ public class Employee {
 
   public String getGrade() {
     return grade;
-  }
-
-  public void setName(String name) {
-    this.name = name;
-  }
-
-  public void setGrade(String grade) {
-    this.grade = grade;
   }
 
 }
