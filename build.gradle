@@ -24,6 +24,7 @@ subprojects {
     dependencies {
         implementation("org.springframework.boot:spring-boot-starter-web:2.1.4.RELEASE")
         implementation('org.springframework.boot:spring-boot-starter-data-jpa:2.1.4.RELEASE')
+        implementation group: 'mysql', name: 'mysql-connector-java', version: '8.0.15'
 
         // for test only
         testImplementation group: 'com.h2database', name: 'h2', version: '1.4.199'
