@@ -11,23 +11,23 @@ import org.assertj.core.api.SoftAssertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.Mock;
 import org.nkcoder.domain.Employee;
 import org.nkcoder.exception.EmployeeNotFoundException;
 import org.nkcoder.repo.EmployeeRepository;
+import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 @ExtendWith(SpringExtension.class)
 public class EmployeeServiceTest {
 
-  @Mock
+  @MockBean
   private EmployeeRepository employeeRepository;
 
   private EmployeeService employeeService;
 
   @BeforeEach
   public void setUp() {
-    employeeService = new EmployeeService(employeeRepository);
+    employeeService = new EmployeeServiceImpl(employeeRepository);
   }
 
   @Test

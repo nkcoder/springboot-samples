@@ -2,7 +2,7 @@ package org.nkcoder.controller;
 
 import org.nkcoder.domain.Employee;
 import org.nkcoder.exception.EmployeeNotFoundException;
-import org.nkcoder.service.EmployeeService;
+import org.nkcoder.service.EmployeeServiceImpl;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -12,9 +12,9 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class EmployeeController {
 
-  private EmployeeService employService;
+  private EmployeeServiceImpl employService;
 
-  public EmployeeController(EmployeeService employService) {
+  public EmployeeController(EmployeeServiceImpl employService) {
     this.employService = employService;
   }
 

@@ -13,7 +13,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.nkcoder.domain.Employee;
-import org.nkcoder.service.EmployeeService;
+import org.nkcoder.service.EmployeeServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
@@ -29,7 +29,7 @@ public class EmployeeControllerTest {
   private MockMvc mockMvc;
 
   @MockBean
-  private EmployeeService employeeService;
+  private EmployeeServiceImpl employeeService;
 
   @Test
   public void getEmployee_shouldReturnEmployee() throws Exception {
