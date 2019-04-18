@@ -72,4 +72,12 @@ public class EmployeeControllerTest {
     return mapper.writeValueAsString(o);
   }
 
+
+  // using rest-assured
+  @Test
+  public void getEmployee_thenReturnEmployeeInfo() {
+    given(employeeService.getEmployee(anyString())).willReturn(new Employee("daniel", "junior"));
+
+  }
+
 }

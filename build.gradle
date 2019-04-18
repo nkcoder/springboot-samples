@@ -16,25 +16,12 @@ subprojects {
     group 'org.nkcoder'
     version '1.0'
 
+    sourceCompatibility = 1.8
+    targetCompatibility = 1.8
 
     repositories {
         mavenCentral()
+        maven { url "https://maven.aliyun.com/repository/central" }
     }
 
-    dependencies {
-        implementation("org.springframework.boot:spring-boot-starter-web:2.1.4.RELEASE")
-        implementation('org.springframework.boot:spring-boot-starter-data-jpa:2.1.4.RELEASE')
-        implementation group: 'mysql', name: 'mysql-connector-java', version: '8.0.15'
-
-        // for test only
-        testImplementation group: 'com.h2database', name: 'h2', version: '1.4.199'
-        testImplementation('org.junit.jupiter:junit-jupiter:5.4.2')
-        testImplementation('org.springframework.boot:spring-boot-starter-test:2.1.4.RELEASE') {
-            exclude group: 'junit', module: 'junit'
-        }
-
-    }
-
-    sourceCompatibility = 1.8
-    targetCompatibility = 1.8
 }
