@@ -1,12 +1,19 @@
+ext {
+    springBootVersion = '2.1.4.RELEASE'
+    junitVersion = '5.4.2'
+    h2Version = '1.4.199'
+    mysqlVersion = "8.0.15"
+}
+
 dependencies {
-    implementation("org.springframework.boot:spring-boot-starter-web:2.1.4.RELEASE")
-    implementation('org.springframework.boot:spring-boot-starter-data-jpa:2.1.4.RELEASE')
-    implementation('mysql:mysql-connector-java:8.0.15')
+    implementation("org.springframework.boot:spring-boot-starter-web:$springBootVersion")
+    implementation("org.springframework.boot:spring-boot-starter-data-jpa:$springBootVersion")
+    implementation("mysql:mysql-connector-java:$mysqlVersion")
 
     // for test only
-    testImplementation group: 'com.h2database', name: 'h2', version: '1.4.199'
-    testImplementation('org.junit.jupiter:junit-jupiter:5.4.2')
-    testImplementation('org.springframework.boot:spring-boot-starter-test:2.1.4.RELEASE') {
+    testImplementation("com.h2database:h2:$h2Version")
+    testImplementation("org.junit.jupiter:junit-jupiter:$junitVersion")
+    testImplementation("org.springframework.boot:spring-boot-starter-test:$springBootVersion") {
         exclude group: 'junit', module: 'junit'
     }
 
