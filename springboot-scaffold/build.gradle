@@ -1,7 +1,20 @@
-// common
+buildscript {
+    repositories {
+        mavenCentral()
+        maven { url "https://maven.aliyun.com/repository/central" }
+    }
+    dependencies {
+        classpath "com.avast.gradle:gradle-docker-compose-plugin:0.9.1"
+        classpath "org.owasp:dependency-check-gradle:5.0.0-M2"
+        classpath "gradle.plugin.com.github.spotbugs:spotbugs-gradle-plugin:1.7.1"
+        classpath "org.sonarsource.scanner.gradle:sonarqube-gradle-plugin:2.7"
+    }
+}
+
 plugins {
     id 'java'
     id 'idea'
+    id 'application'
     id 'org.springframework.boot'
 }
 
@@ -16,19 +29,25 @@ repositories {
     maven { url "https://maven.aliyun.com/repository/central" }
 }
 
+wrapper {
+    gradleVersion = '5.3.1'
+}
 
 ext {
     springBootVersion = '2.1.4.RELEASE'
     junitVersion = '5.4.2'
     h2Version = '1.4.199'
-    mysqlVersion = "8.0.15"
+    mysqlVersion = '8.0.15'
+    jackonVersion = '2.9.8'
+    flywayVersion = '5.2.4'
 }
 
 dependencies {
     implementation("org.springframework.boot:spring-boot-starter-web:$springBootVersion")
     implementation("org.springframework.boot:spring-boot-starter-data-jpa:$springBootVersion")
     implementation("mysql:mysql-connector-java:$mysqlVersion")
-
+    implementation("org.flywaydb:flyway-core:$flywayVersion")
+    implementation("com.fasterxml.jackson.core:jackson-databind:$jackonVersion")
 
     runtimeOnly("com.h2database:h2:$h2Version")
     runtimeOnly("org.springframework.boot:spring-boot-devtools:$springBootVersion")
@@ -39,3 +58,15 @@ dependencies {
     }
 
 }
+
+application {
+    mainClassName = "xxx.yyy.ScaffoldApplication"
+    applicationDefaultJvmArgs = ["-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=5005"]
+}
+
+apply from: "${rootProject.projectDir}/gradle/docker-compose/docker-compose.gradle"
+apply from: "${rootProject.projectDir}/gradle/dependency-check/dependency-check.gradle"
+apply from: "${rootProject.projectDir}/gradle/spotbugs/spotbugs.gradle"
+apply from: "${rootProject.projectDir}/gradle/checkstyle/checkstyle.gradle"
+apply from: "${rootProject.projectDir}/gradle/jacoco.gradle"
+apply from: "${rootProject.projectDir}/gradle/sonarqube.gradle"
