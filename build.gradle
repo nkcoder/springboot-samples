@@ -1,9 +1,14 @@
 buildscript {
     repositories {
+        maven { url "https://maven.aliyun.com/repository/central" }
         mavenCentral()
+        maven {
+            url "https://plugins.gradle.org/m2/"
+        }
     }
     dependencies {
         classpath("org.springframework.boot:spring-boot-gradle-plugin:2.0.5.RELEASE")
+        classpath("gradle.plugin.com.github.spotbugs:spotbugs-gradle-plugin:1.7.1")
     }
 }
 
@@ -22,5 +27,8 @@ subprojects {
         mavenCentral()
         maven { url "https://maven.aliyun.com/repository/central" }
     }
+
+    apply from: rootProject.file('gradle/checkstyle/checkstyle.gradle')
+    apply from: rootProject.file('gradle/spotbugs/spotbugs.gradle')
 
 }

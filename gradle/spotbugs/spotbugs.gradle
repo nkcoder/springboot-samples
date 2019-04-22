@@ -1,0 +1,16 @@
+apply plugin: "com.github.spotbugs"
+
+spotbugs {
+    reportsDir = file("$project.buildDir/findbugsReports")
+    effort = "max"
+    excludeFilter = rootProject.file('gradle/spotbugs/exclude.xml')
+    reportLevel = "high"
+}
+
+spotbugsMain {
+    reports {
+        xml.enabled false
+        html.enabled true
+    }
+}
+

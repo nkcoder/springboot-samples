@@ -1,0 +1,18 @@
+apply plugin: 'checkstyle'
+
+checkstyle {
+    toolVersion = '8.2'
+    configFile = rootProject.file('gradle/checkstyle/checkstyle.xml')
+    configProperties = [
+            'checkstyle.cache.file': "${buildDir}/checkstyle.cache",
+    ]
+    ignoreFailures = false
+    showViolations = true
+}
+
+tasks.withType(Checkstyle) {
+//    exclude 'xxx/yyy/YourJava.java'
+//    exclude 'xxx/yyy/*'
+}
+
+
