@@ -1,2 +1,3 @@
 rootProject.name = 'springboot-demo'
 include 'tdd-demo'
+include 'springboot-scaffold'
