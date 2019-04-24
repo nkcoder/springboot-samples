@@ -7,20 +7,20 @@ import javax.persistence.Table;
 @Table(name = "HOME_POLICY")
 public class HomePolicy extends Policy {
 
-  private String buildingMaterial;
-  private String buildingType;
-  private String numberOfRooms;
+    private String buildingMaterial;
+    private String buildingType;
+    private String numberOfRooms;
 
-  public String getBuildingMaterial() {
-    return buildingMaterial;
-  }
+    public String getBuildingMaterial() {
+        return buildingMaterial;
+    }
 
-  public String getBuildingType() {
-    return buildingType;
-  }
+    public String getBuildingType() {
+        return buildingType;
+    }
 
-  public String getNumberOfRooms() {
-    return numberOfRooms;
-  }
+    public String getNumberOfRooms() {
+        return numberOfRooms;
+    }
 
 }

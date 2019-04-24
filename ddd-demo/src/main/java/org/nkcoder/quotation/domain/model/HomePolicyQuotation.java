@@ -1,8 +1,9 @@
 package org.nkcoder.quotation.domain.model;
 
+import lombok.Setter;
+
 import javax.persistence.Entity;
 import javax.persistence.Table;
-import lombok.Setter;
 
 @Setter
 @Entity

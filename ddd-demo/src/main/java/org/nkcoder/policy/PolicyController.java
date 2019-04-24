@@ -1,23 +1,22 @@
 package org.nkcoder.policy;
 
 import io.swagger.annotations.ApiOperation;
-import javax.validation.Valid;
 import org.nkcoder.policy.command.CreateCarPolicyCommand;
 import org.nkcoder.policy.command.CreateHomePolicyCommand;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseStatus;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import javax.validation.Valid;
 
 @RestController
 @RequestMapping("/api/policy")
 public class PolicyController {
 
-    @Autowired
     private PolicyApplicationService policyApplicationService;
+
+    public PolicyController(PolicyApplicationService policyApplicationService) {
+        this.policyApplicationService = policyApplicationService;
+    }
 
     @PutMapping(value = "/home")
     @ResponseStatus(HttpStatus.CREATED)

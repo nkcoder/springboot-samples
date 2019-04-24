@@ -1,9 +1,10 @@
 package org.nkcoder.quotation.command;
 
 import io.swagger.annotations.ApiModelProperty;
-import javax.validation.constraints.NotBlank;
 import lombok.Getter;
 import lombok.Setter;
+
+import javax.validation.constraints.NotBlank;
 
 @Getter
 @Setter

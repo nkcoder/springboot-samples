@@ -7,7 +7,6 @@ import org.nkcoder.policy.domain.model.HomePolicy;
 import org.nkcoder.policy.domain.service.PolicyFactoryService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -15,8 +14,11 @@ public class PolicyApplicationService {
 
     private static Logger logger = LoggerFactory.getLogger(PolicyApplicationService.class);
 
-    @Autowired
     private PolicyFactoryService policyFactoryService;
+
+    public PolicyApplicationService(PolicyFactoryService policyFactoryService) {
+        this.policyFactoryService = policyFactoryService;
+    }
 
     public String createPolicy(CreateHomePolicyCommand command) {
         HomePolicy homePolicy = policyFactoryService.createPolicy(command);

@@ -1,12 +1,13 @@
 package org.nkcoder.quotation.domain.model;
 
-import java.time.LocalDate;
+import lombok.Setter;
+import org.nkcoder.common.Gender;
+
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.Table;
-import lombok.Setter;
-import org.nkcoder.common.Gender;
+import java.time.LocalDate;
 
 @Setter
 @Entity

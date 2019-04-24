@@ -1,13 +1,14 @@
 package org.nkcoder.quotation.command;
 
 import io.swagger.annotations.ApiModelProperty;
-import java.time.LocalDate;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
 import lombok.Getter;
 import lombok.Setter;
 import org.nkcoder.common.Gender;
 import org.nkcoder.quotation.domain.model.Quotation;
+
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import java.time.LocalDate;
 
 @Getter
 @Setter

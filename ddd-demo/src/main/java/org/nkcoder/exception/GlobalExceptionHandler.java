@@ -1,12 +1,6 @@
 package org.nkcoder.exception;
 
-import static org.springframework.http.HttpStatus.BAD_REQUEST;
-import static org.springframework.http.HttpStatus.FORBIDDEN;
-import static org.springframework.http.HttpStatus.FOUND;
-import static org.springframework.http.HttpStatus.NOT_FOUND;
-
 import com.fasterxml.jackson.databind.exc.InvalidFormatException;
-import java.util.stream.Collectors;
 import org.nkcoder.policy.exception.PolicyNotExistException;
 import org.nkcoder.quotation.exception.InvalidQuotationException;
 import org.nkcoder.user.exception.EmailExistException;
@@ -14,11 +8,11 @@ import org.nkcoder.user.exception.LoginFailedException;
 import org.nkcoder.user.exception.UserNotExistException;
 import org.springframework.context.support.DefaultMessageSourceResolvable;
 import org.springframework.web.bind.MethodArgumentNotValidException;
-import org.springframework.web.bind.annotation.ControllerAdvice;
-import org.springframework.web.bind.annotation.ExceptionHandler;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.ResponseStatus;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.stream.Collectors;
+
+import static org.springframework.http.HttpStatus.*;
 
 @ControllerAdvice(annotations = RestController.class)
 public class GlobalExceptionHandler {

@@ -1,10 +1,11 @@
 package org.nkcoder.quotation.domain.model;
 
-import java.util.UUID;
-import javax.persistence.Id;
-import javax.persistence.MappedSuperclass;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+
+import javax.persistence.Id;
+import javax.persistence.MappedSuperclass;
+import java.util.UUID;
 
 @Setter
 @NoArgsConstructor

@@ -11,25 +11,28 @@ import org.nkcoder.policy.repository.HomePolicyRepository;
 import org.nkcoder.quotation.exception.InvalidQuotationException;
 import org.nkcoder.quotation.repository.CarPolicyQuotationRepository;
 import org.nkcoder.quotation.repository.HomePolicyQuotationRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
 public class PolicyFactoryService {
 
-    @Autowired
     private HomePolicyRepository homePolicyRepository;
+    private HomePolicyQuotationRepository homePolicyQuotationRepository;
+    private CarPolicyRepository carPolicyRepository;
+    private CarPolicyQuotationRepository carPolicyQuotationRepository;
+
+    private CarPolicyMapper carPolicyMapper = new CarPolicyMapper();
     private HomePolicyMapper homePolicyMapper = new HomePolicyMapper();
 
-    @Autowired
-    private HomePolicyQuotationRepository homePolicyQuotationRepository;
-
-    @Autowired
-    private CarPolicyRepository carPolicyRepository;
-    private CarPolicyMapper carPolicyMapper = new CarPolicyMapper();
-
-    @Autowired
-    private CarPolicyQuotationRepository carPolicyQuotationRepository;
+    public PolicyFactoryService(HomePolicyRepository homePolicyRepository,
+                                HomePolicyQuotationRepository homePolicyQuotationRepository,
+                                CarPolicyRepository carPolicyRepository,
+                                CarPolicyQuotationRepository carPolicyQuotationRepository) {
+        this.homePolicyRepository = homePolicyRepository;
+        this.homePolicyQuotationRepository = homePolicyQuotationRepository;
+        this.carPolicyRepository = carPolicyRepository;
+        this.carPolicyQuotationRepository = carPolicyQuotationRepository;
+    }
 
     public HomePolicy createPolicy(CreateHomePolicyCommand command) {
         HomePolicy homePolicy = homePolicyMapper.map(command, HomePolicy.class);

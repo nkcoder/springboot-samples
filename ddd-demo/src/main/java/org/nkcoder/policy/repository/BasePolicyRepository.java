@@ -1,9 +1,10 @@
 package org.nkcoder.policy.repository;
 
-import java.util.Optional;
 import org.nkcoder.policy.domain.model.Policy;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.NoRepositoryBean;
+
+import java.util.Optional;
 
 
 @NoRepositoryBean

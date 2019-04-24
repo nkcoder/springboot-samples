@@ -1,4 +1,4 @@
 package org.nkcoder.exception;
 
-public class ErrorInputException extends RuntimeException{
+public class ErrorInputException extends RuntimeException {
 }

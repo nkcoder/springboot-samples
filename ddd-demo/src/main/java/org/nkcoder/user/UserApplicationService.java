@@ -9,21 +9,24 @@ import org.nkcoder.user.domain.service.RegisterService;
 import org.nkcoder.user.exception.UserNotExistException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
 public class UserApplicationService {
+
     private static Logger logger = LoggerFactory.getLogger(UserApplicationService.class);
 
-    @Autowired
     private UserRepository userRepository;
-
-    @Autowired
     private LoginService loginService;
-
-    @Autowired
     private RegisterService registerService;
+
+    public UserApplicationService(UserRepository userRepository,
+                                  LoginService loginService,
+                                  RegisterService registerService) {
+        this.userRepository = userRepository;
+        this.loginService = loginService;
+        this.registerService = registerService;
+    }
 
     public String register(RegisterCommand command) {
         User user = registerService.createUser(command.getOwnerEmail(), command.getPolicyNumber());
@@ -32,7 +35,8 @@ public class UserApplicationService {
     }
 
     public void initialPassword(SetPasswordCommand command) {
-        User user = userRepository.findByUuid(command.getUuid()).orElseThrow(UserNotExistException::new);
+        User user = userRepository.findByUuid(command.getUuid())
+                .orElseThrow(UserNotExistException::new);
         user.setPassWord(command.getPassword());
         logger.info("Set password with uuid[{}]", command.getUuid());
         userRepository.save(user);
