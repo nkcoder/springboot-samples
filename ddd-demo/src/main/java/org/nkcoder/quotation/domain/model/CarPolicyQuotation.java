@@ -1,6 +1,5 @@
 package org.nkcoder.quotation.domain.model;
 
-import lombok.Setter;
 import org.nkcoder.common.Gender;
 
 import javax.persistence.Entity;
@@ -9,7 +8,6 @@ import javax.persistence.Enumerated;
 import javax.persistence.Table;
 import java.time.LocalDate;
 
-@Setter
 @Entity
 @Table(name = "CAR_POLICY_QUOTATION")
 public class CarPolicyQuotation extends Quotation {

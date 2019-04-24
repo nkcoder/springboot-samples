@@ -8,7 +8,6 @@ import org.nkcoder.user.UserRepository;
 import org.nkcoder.user.domain.model.User;
 import org.nkcoder.user.exception.EmailExistException;
 import org.nkcoder.utils.EmailManager;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.UUID;
@@ -16,14 +15,17 @@ import java.util.UUID;
 @Service
 public class RegisterService {
 
-    @Autowired
-    UserRepository userRepository;
+    private UserRepository userRepository;
+    private PolicyRepository policyRepository;
+    private EmailManager emailManager;
 
-    @Autowired
-    PolicyRepository policyRepository;
-
-    @Autowired
-    EmailManager emailManager;
+    public RegisterService(UserRepository userRepository,
+                           PolicyRepository policyRepository,
+                           EmailManager emailManager) {
+        this.userRepository = userRepository;
+        this.policyRepository = policyRepository;
+        this.emailManager = emailManager;
+    }
 
     public User createUser(String email, String policyNumber) {
         if (!isInputValidation(policyNumber, email)) {

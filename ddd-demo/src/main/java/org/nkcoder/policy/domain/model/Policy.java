@@ -1,12 +1,9 @@
 package org.nkcoder.policy.domain.model;
 
-import lombok.Setter;
-
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.util.UUID;
 
-@Setter
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
 @Table(name = "POLICY")

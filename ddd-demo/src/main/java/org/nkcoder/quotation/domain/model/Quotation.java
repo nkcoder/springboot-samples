@@ -1,25 +1,19 @@
 package org.nkcoder.quotation.domain.model;
 
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.Getter;
 
 import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
 import java.util.UUID;
 
-@Setter
-@NoArgsConstructor
+@Getter
 @MappedSuperclass
 public abstract class Quotation {
     @Id
     private String quoteId = UUID.randomUUID().toString();
     private Double premium;
 
-    public String getQuoteId() {
-        return quoteId;
-    }
-
-    public Double getPremium() {
-        return premium;
+    public void setPremium(Double premium) {
+        this.premium = premium;
     }
 }

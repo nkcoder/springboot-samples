@@ -3,12 +3,10 @@ package org.nkcoder.user.command;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Getter;
-import lombok.Setter;
 
 import javax.validation.constraints.NotBlank;
 
 @Getter
-@Setter
 @ApiModel(description = "User register request model")
 public class RegisterCommand {
 

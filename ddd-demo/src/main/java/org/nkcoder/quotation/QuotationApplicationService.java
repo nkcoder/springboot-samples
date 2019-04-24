@@ -9,7 +9,6 @@ import org.nkcoder.quotation.repository.CarPolicyQuotationRepository;
 import org.nkcoder.quotation.repository.HomePolicyQuotationRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -17,14 +16,17 @@ public class QuotationApplicationService {
 
     private static Logger logger = LoggerFactory.getLogger(QuotationApplicationService.class);
 
-    @Autowired
     private QuoteService quoteService;
-
-    @Autowired
     private HomePolicyQuotationRepository homePolicyQuotationRepository;
-
-    @Autowired
     private CarPolicyQuotationRepository carPolicyQuotationRepository;
+
+    public QuotationApplicationService(QuoteService quoteService,
+                                       HomePolicyQuotationRepository homePolicyQuotationRepository,
+                                       CarPolicyQuotationRepository carPolicyQuotationRepository) {
+        this.quoteService = quoteService;
+        this.homePolicyQuotationRepository = homePolicyQuotationRepository;
+        this.carPolicyQuotationRepository = carPolicyQuotationRepository;
+    }
 
     public HomePolicyQuotation calculateQuote(EnquiryHomePolicyCommand command) {
         HomePolicyQuotation homePolicyQuotation = quoteService.createQuotation(command);

@@ -6,7 +6,6 @@ import org.nkcoder.quotation.domain.model.CarPolicyQuotation;
 import org.nkcoder.quotation.domain.model.HomePolicyQuotation;
 import org.nkcoder.quotation.mapper.CarPolicyQuotationMapper;
 import org.nkcoder.quotation.mapper.HomePolicyQuotationMapper;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -15,8 +14,11 @@ public class QuoteService {
     private HomePolicyQuotationMapper homePolicyQuotationMapper = new HomePolicyQuotationMapper();
     private CarPolicyQuotationMapper carPolicyQuotationMapper = new CarPolicyQuotationMapper();
 
-    @Autowired
     private QuoteCalculator quoteCalculator;
+
+    public QuoteService(QuoteCalculator quoteCalculator) {
+        this.quoteCalculator = quoteCalculator;
+    }
 
     public HomePolicyQuotation createQuotation(EnquiryHomePolicyCommand command) {
         HomePolicyQuotation homePolicyQuotation = homePolicyQuotationMapper.map(command, HomePolicyQuotation.class);

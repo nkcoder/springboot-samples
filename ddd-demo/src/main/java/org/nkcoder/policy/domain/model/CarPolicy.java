@@ -1,7 +1,6 @@
 package org.nkcoder.policy.domain.model;
 
 import lombok.Getter;
-import lombok.Setter;
 import org.nkcoder.common.Gender;
 
 import javax.persistence.Entity;
@@ -11,7 +10,6 @@ import javax.persistence.Table;
 import java.time.LocalDate;
 
 @Getter
-@Setter
 @Entity
 @Table(name = "CAR_POLICY")
 public class CarPolicy extends Policy {

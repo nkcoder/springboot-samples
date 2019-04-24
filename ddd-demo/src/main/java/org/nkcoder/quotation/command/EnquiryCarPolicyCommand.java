@@ -2,7 +2,6 @@ package org.nkcoder.quotation.command;
 
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Getter;
-import lombok.Setter;
 import org.nkcoder.common.Gender;
 import org.nkcoder.quotation.domain.model.Quotation;
 
@@ -11,7 +10,6 @@ import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
 
 @Getter
-@Setter
 public class EnquiryCarPolicyCommand extends Quotation {
 
     @NotBlank(message = "productiveYear can not be empty")

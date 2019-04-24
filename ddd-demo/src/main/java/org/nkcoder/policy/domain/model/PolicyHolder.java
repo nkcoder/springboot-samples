@@ -1,11 +1,8 @@
 package org.nkcoder.policy.domain.model;
 
-import lombok.Setter;
-
 import javax.persistence.Embeddable;
 import java.time.LocalDate;
 
-@Setter
 @Embeddable
 public class PolicyHolder {
 
