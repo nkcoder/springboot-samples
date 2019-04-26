@@ -12,6 +12,10 @@ buildscript {
     }
 }
 
+wrapper {
+    gradleVersion = '5.3.1'
+}
+
 subprojects {
     apply plugin: 'java'
     apply plugin: 'idea'
