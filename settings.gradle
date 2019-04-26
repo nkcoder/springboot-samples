@@ -1,4 +1,4 @@
 rootProject.name = 'springboot-demo'
 include 'tdd-demo'
-include 'ddd-in-action'
+include 'ddd-demo'
 
