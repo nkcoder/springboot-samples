@@ -1,4 +1,4 @@
-rootProject.name = 'springboot-demo'
+rootProject.name = 'spring-demo'
 include 'tdd-demo'
 include 'ddd-demo'
 
