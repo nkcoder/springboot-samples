@@ -35,4 +35,25 @@ subprojects {
     apply from: rootProject.file('gradle/checkstyle/checkstyle.gradle')
     apply from: rootProject.file('gradle/spotbugs/spotbugs.gradle')
 
+    ext {
+        springBootVersion = '2.1.4.RELEASE'
+        junitVersion = '5.4.2'
+        mysqlVersion = "8.0.15"
+        jacksonVersion = '2.9.9'
+    }
+
+    dependencies {
+        implementation("org.springframework.boot:spring-boot-starter-web:$springBootVersion")
+        implementation("org.springframework.boot:spring-boot-starter-data-jpa:$springBootVersion")
+        implementation("mysql:mysql-connector-java:$mysqlVersion")
+        implementation("org.springframework.boot:spring-boot-starter-security:$springBootVersion")
+
+        implementation("com.fasterxml.jackson.core:jackson-databind:$jacksonVersion")
+
+        testImplementation("org.junit.jupiter:junit-jupiter:$junitVersion")
+        testImplementation("org.springframework.boot:spring-boot-starter-test:$springBootVersion") {
+            exclude group: 'junit', module: 'junit'
+        }
+    }
+
 }

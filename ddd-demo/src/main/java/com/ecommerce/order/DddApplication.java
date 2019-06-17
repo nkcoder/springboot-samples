@@ -10,9 +10,9 @@ import static java.time.ZoneId.of;
 import static java.util.TimeZone.getTimeZone;
 
 @SpringBootApplication
-public class Application {
+public class DddApplication {
     public static void main(String[] args) {
-        SpringApplication.run(Application.class, args);
+        SpringApplication.run(DddApplication.class, args);
     }
 
     @PostConstruct
