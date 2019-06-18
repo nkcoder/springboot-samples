@@ -35,6 +35,7 @@ dependencies {
     implementation("org.springframework.boot:spring-boot-starter-jdbc")
 
     //common dependencies
+    implementation("mysql:mysql-connector-java:8.0.15")
     implementation('io.jsonwebtoken:jjwt:0.9.1')
     implementation("org.flywaydb:flyway-core")
     implementation('com.google.guava:guava:27.0.1-jre')
@@ -50,7 +51,7 @@ dependencies {
 
     //jackson dependencies
     implementation('com.fasterxml.jackson.module:jackson-module-parameter-names:2.9.8')
-    
+
 
     //test dependencies
     testImplementation("io.rest-assured:spring-mock-mvc")

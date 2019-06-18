@@ -8,26 +8,26 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 public class EmployeeController {
 
-    private EmployeeServiceImpl employService;
+  private EmployeeServiceImpl employService;
 
-    public EmployeeController(EmployeeServiceImpl employService) {
-        this.employService = employService;
+  public EmployeeController(EmployeeServiceImpl employService) {
+    this.employService = employService;
+  }
+
+  @GetMapping("/employees/{name}")
+  public Employee getEmployee(@PathVariable("name") String name) {
+
+    Employee employee = employService.getEmployee(name);
+    if (employee == null) {
+      throw new EmployeeNotFoundException();
     }
 
-    @GetMapping("/employees/{name}")
-    public Employee getEmployee(@PathVariable("name") String name) {
+    return employee;
+  }
 
-        Employee employee = employService.getEmployee(name);
-        if (employee == null) {
-            throw new EmployeeNotFoundException();
-        }
-
-        return employee;
-    }
-
-    @PostMapping("/employees")
-    public Employee saveEmployee(@RequestBody Employee employee) {
-        return employService.saveEmployee(employee);
-    }
+  @PostMapping("/employees")
+  public Employee saveEmployee(@RequestBody Employee employee) {
+    return employService.saveEmployee(employee);
+  }
 
 }

@@ -7,13 +7,10 @@ application {
     applicationDefaultJvmArgs = ["-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=5005"]
 }
 
-ext {
-    h2Version = '1.4.199'
-}
-
 dependencies {
+    implementation("org.springframework.boot:spring-boot-starter-data-jpa:2.1.4.RELEASE")
     // for test only
-    testImplementation("com.h2database:h2:$h2Version")
+    runtime("com.h2database:h2:1.4.199")
 
 }
 
