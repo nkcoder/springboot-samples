@@ -2,4 +2,3 @@ rootProject.name = 'spring-demo'
 include 'tdd-demo'
 include 'ddd-demo'
 include 'dev-tools'
-
