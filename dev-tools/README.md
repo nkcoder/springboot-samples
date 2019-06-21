@@ -1,16 +1,23 @@
-`spring-boot-devtools`提供了一些辅助功能，可以提高开发阶段的效率，主要包括：默认属性(Property Defaults), 自动重启(Auto Restart), LiveReload, 全局设置(Global Settings)。
+`spring-boot-devtools`提供了一些辅助开发的功能，比如：
+
+- 自动禁用依赖库或模板的缓存，启动 web 模块的 debug 日志
+- 自动重启：保存文件（Eclipse）或者 Build（Intellij Idea）时自动重启应用
+- LiveReload 自动触发浏览器的刷新（资源发生变化时）
+- 全局配置：提供全局配置文件，对所有包含 devtools 的应用生效
+
+在实际开发中，自动重启功能比较有用，所以这里主要介绍自动重启的配置与使用。
 
 ## 添加依赖
 
-maven配置：
+maven 配置：
 
-	<dependency>
-		<groupId>org.springframework.boot</groupId>
-		<artifactId>spring-boot-devtools</artifactId>
-		<optional>true</optional>
-	</dependency>
-	
-gradle配置：
+    <dependency>
+    	<groupId>org.springframework.boot</groupId>
+    	<artifactId>spring-boot-devtools</artifactId>
+    	<optional>true</optional>
+    </dependency>
+
+gradle 配置：
 
     configurations {
       developmentOnly
@@ -21,24 +28,39 @@ gradle配置：
     dependencies {
       developmentOnly("org.springframework.boot:spring-boot-devtools")
     }
-    
-- `devtool`在生产环境自动禁用，比如使用`java -jar`启动。
-- 在依赖配置中，如maven中添加`optional`标记，在gradle中使用自定义的developmentOnly，表示该依赖不会被传递。
 
-    
+- 在依赖配置中，如 maven 中添加`optional`标记，在 gradle 中使用自定义的 developmentOnly，表示该依赖不会被传递。
+- 在生产环境下，`devtool`会自动禁用，通过`java -jar`启动应用被认为是生产环境。
+
 ## 自动重启
 
-  如果classpath上的文件发生了变化，应用会自动重启。
-  自动重启的触发：在Eclipse中，被修改的文件保存时会触发重启；在Intellij Idea中，使用`Build -> Build Project (CMD+F9)`手动触发。
-  在Intellij Idea中也可以配置在文件保存时触发重启：
-    - Preference -> compiler -> Build project automatically: 选中
-    - Help -> Find action(Shift + CMD + A) -> compiler.automake.allow.when.app.running: 选中
-    
-重启原理：Spring Boot会使用两个classloader，不经常变化的类（主要时第三方依赖）会被加载到base classloader中，开发过程中使用的类会被加载到restart classloader，应用重启时，只有restart classloader会重启，而base classloader不变，所以重启速度会更快一些。另一方面，如果依赖发生了变化，则需要手动重启。
+如果 `classpath` 上的文件发生了变化，应用会自动重启。
 
-禁用自动重启：
-  - 在application.properties中配置：spring.devtools.restart.enabled=false
-  - 在调用`SpringApplication.run()`之前调用：System.setProperty("spring.devtools.restart.enabled", "false");
+自动重启的触发：
+
+- 在 Eclipse 中，被修改的文件保存时会触发重启；在 Intellij Idea 中，使用`Build -> Build Project (CMD+F9)`手动触发。
+- 在 Intellij Idea 中也可以配置在文件保存时触发重启： - Preference -> compiler -> Build project automatically: 选中 - Help -> Find action(Shift + CMD + A) -> compiler.automake.allow.when.app.running: 选中
+
+自动重启原理：Spring Boot 会使用两个 `classloader`，不会发生变化的类（主要是第三方依赖库）会被加载到 `base classloader` 中，开发过程中使用的类会被加载到 `restart classloader`，应用重启时，只有 `restart classloader` 会重启，而 `base classloader` 不变，所以重启速度会更快一些。另一方面，如果依赖发生了变化，则需要手动重启。
+
+### 扩展自动重启监视的目录
+
+    spring.devtools.restart.exclude=static/**,public/**
+    spring.devtools.restart.additional-paths=mypackage/**
+
+### 禁用自动重启：
+
+可以有两种方式：
+
+在 application.properties 中配置：
+
+    spring.devtools.restart.enabled=false
+
+或者在调用`SpringApplication.run()`之前调用：
+
+    System.setProperty("spring.devtools.restart.enabled", "false");
+
+项目的源码见[Github](https://github.com/nkcoder/spring-demo/blob/master/dev-tools/README.md)
 
 ## 参考
 
