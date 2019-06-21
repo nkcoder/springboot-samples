@@ -32,19 +32,35 @@ subprojects {
         maven { url "https://maven.aliyun.com/repository/central" }
     }
 
+    configurations {
+        developmentOnly
+        runtimeClasspath {
+            extendsFrom developmentOnly
+        }
+    }
+
     apply from: rootProject.file('gradle/checkstyle/checkstyle.gradle')
     apply from: rootProject.file('gradle/spotbugs/spotbugs.gradle')
+
+    compileJava {
+        options.compilerArgs << '-parameters'
+    }
 
     ext {
         springBootVersion = '2.1.4.RELEASE'
         junitVersion = '5.4.2'
         mysqlVersion = "8.0.15"
         jacksonVersion = '2.9.9'
+        lombokVersion = '1.18.8'
     }
 
     dependencies {
         implementation("org.springframework.boot:spring-boot-starter-web:$springBootVersion")
+        implementation("org.projectlombok:lombok:$lombokVersion")
         implementation("com.fasterxml.jackson.core:jackson-databind:$jacksonVersion")
+        implementation("com.fasterxml.jackson.module:jackson-module-parameter-names:$jacksonVersion")
+
+        developmentOnly("org.springframework.boot:spring-boot-devtools:$springBootVersion")
 
         testImplementation("org.junit.jupiter:junit-jupiter:$junitVersion")
         testImplementation("org.springframework.boot:spring-boot-starter-test:$springBootVersion") {
