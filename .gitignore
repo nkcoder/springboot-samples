@@ -3,3 +3,6 @@
 out/
 build/
 .DS_Store
+*.iml
+**/build/**
+**/out/**

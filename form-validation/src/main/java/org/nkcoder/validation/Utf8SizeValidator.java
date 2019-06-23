@@ -4,7 +4,6 @@ import java.nio.charset.Charset;
 import java.util.Objects;
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
-import org.nkcoder.validation.UTF8Size;
 
 public class Utf8SizeValidator implements ConstraintValidator<UTF8Size, String> {
 
