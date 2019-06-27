@@ -1,8 +1,8 @@
-package org.nkcoder.repository;
+package org.nkcoder.jpa.repository;
 
 import java.time.LocalDateTime;
 import java.util.List;
-import org.nkcoder.entity.Student;
+import org.nkcoder.jpa.entity.Student;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;

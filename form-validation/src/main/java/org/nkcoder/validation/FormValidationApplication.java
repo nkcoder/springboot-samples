@@ -1,13 +1,13 @@
-package org.nkcoder;
+package org.nkcoder.validation;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class JpaApplication {
+public class FormValidationApplication {
 
   public static void main(String[] args) {
-    SpringApplication.run(JpaApplication.class, args);
+    SpringApplication.run(FormValidationApplication.class, args);
   }
 
 }

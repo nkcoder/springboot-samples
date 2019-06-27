@@ -54,7 +54,7 @@ public class Employee implements Serializable {
 @Target({METHOD, FIELD})
 @Retention(RetentionPolicy.RUNTIME)
 public @interface UTF8Size {
-  String message() default "{javax.validation.constraints.Size.message}";
+  String message() default validator;
 
   int min() default 0;
   int max() default Integer.MAX_VALUE;

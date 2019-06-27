@@ -1,0 +1,8 @@
+cache:
+  specs:
+    one:
+      expireAfterWrite: 5
+      maximumSize: 1000
+    two:
+      expireAfterWrite: 20
+      maximumSize: 2000

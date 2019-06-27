@@ -1,8 +1,8 @@
 package org.nkcoder.controller;
 
 import lombok.extern.slf4j.Slf4j;
-import org.nkcoder.entity.Student;
-import org.nkcoder.repository.StudentRepository;
+import org.nkcoder.jpa.entity.Student;
+import org.nkcoder.jpa.repository.StudentRepository;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;

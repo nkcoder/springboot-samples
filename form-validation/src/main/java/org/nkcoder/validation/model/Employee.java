@@ -1,4 +1,4 @@
-package org.nkcoder.model;
+package org.nkcoder.validation.model;
 
 import java.io.Serializable;
 import javax.validation.constraints.Digits;
@@ -9,7 +9,7 @@ import javax.validation.constraints.Size;
 import lombok.Getter;
 import lombok.ToString;
 import org.hibernate.validator.constraints.CreditCardNumber;
-import org.nkcoder.validation.UTF8Size;
+import org.nkcoder.validation.validator.UTF8Size;
 
 @Getter
 @ToString

@@ -1,4 +1,4 @@
-package org.nkcoder.validation;
+package org.nkcoder.validation.validator;
 
 import static java.lang.annotation.ElementType.FIELD;
 import static java.lang.annotation.ElementType.METHOD;
@@ -15,7 +15,7 @@ import javax.validation.Payload;
 @Target({METHOD, FIELD})
 @Retention(RetentionPolicy.RUNTIME)
 public @interface UTF8Size {
-  String message() default "{javax.validation.constraints.Size.message}";
+  String message() default "{javax.validator.constraints.Size.message}";
 
   int min() default 0;
   int max() default Integer.MAX_VALUE;

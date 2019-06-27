@@ -1,4 +1,4 @@
-package org.nkcoder.validation;
+package org.nkcoder.validation.validator;
 
 import java.nio.charset.Charset;
 import java.util.Objects;

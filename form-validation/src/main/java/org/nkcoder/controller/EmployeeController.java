@@ -3,7 +3,7 @@ package org.nkcoder.controller;
 import java.util.UUID;
 import javax.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
-import org.nkcoder.model.Employee;
+import org.nkcoder.validation.model.Employee;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;

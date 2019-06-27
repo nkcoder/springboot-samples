@@ -1,4 +1,4 @@
-package org.nkcoder;
+package org.nkcoder.validation.config;
 
 import com.fasterxml.jackson.annotation.JsonCreator.Mode;
 import com.fasterxml.jackson.databind.Module;

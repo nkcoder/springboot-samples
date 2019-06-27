@@ -1,4 +1,4 @@
-package org.nkcoder.entity;
+package org.nkcoder.jpa.entity;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
