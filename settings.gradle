@@ -3,4 +3,5 @@ include 'tdd-demo'
 include 'ddd-demo'
 include 'dev-tools'
 include 'form-validation'
+include 'spring-jpa'
 

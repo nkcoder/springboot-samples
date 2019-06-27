@@ -15,6 +15,8 @@ import org.nkcoder.validation.UTF8Size;
 @ToString
 public class Employee implements Serializable {
 
+  private static final long serialVersionUID = -8224860450904540019L;
+
   @NotEmpty(message = "name is required")
   @UTF8Size(max = 16, message = "name should be short than 128")
   private final String name;

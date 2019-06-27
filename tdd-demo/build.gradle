@@ -8,9 +8,9 @@ application {
 }
 
 dependencies {
-    implementation("org.springframework.boot:spring-boot-starter-data-jpa:2.1.4.RELEASE")
+    implementation("org.springframework.boot:spring-boot-starter-data-jpa:$springBootVersion")
     // for test only
-    runtime("com.h2database:h2:1.4.199")
+    runtime("com.h2database:h2:$h2Version")
 
 }
 
