@@ -2,6 +2,7 @@ package org.nkcoder.cache.service;
 
 import java.util.concurrent.TimeUnit;
 import lombok.extern.slf4j.Slf4j;
+import org.nkcoder.cache.caffeine.CacheConfiguration;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
@@ -9,7 +10,7 @@ import org.springframework.stereotype.Service;
 @Slf4j
 public class CalculateService {
 
-  @Cacheable("one")
+  @Cacheable(value = CacheConfiguration.CACHE_ONE)
   public int calculate(int x, int y) {
     simulateHeavyOperation();
     int result = x * y;

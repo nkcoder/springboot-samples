@@ -16,7 +16,7 @@ public class CalculatorServiceTest {
   private CalculateService calculateService;
 
   @Test
-  public void shouldReturnResult_whenCalculate() {
+  public void shouldHitCache_whenCalculateRepeat() {
     IntStream.rangeClosed(1, 3).forEach(v -> calculateService.calculate(3, 3));
   }
 
