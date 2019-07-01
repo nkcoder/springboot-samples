@@ -70,4 +70,7 @@ subprojects {
         }
     }
 
+    bootRun {
+        systemProperties System.properties
+    }
 }
