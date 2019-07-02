@@ -1,0 +1,17 @@
+spring:
+  jpa:
+    show-sql: true
+    database-platform: org.hibernate.dialect.H2Dialect
+    hibernate:
+      ddl-auto: none
+  datasource:
+    url: jdbc:h2:mem:testdb
+    driver-class-name: org.h2.Driver
+    username: sa
+    password: root
+
+
+logging:
+  level:
+    org.hibernate.SQL: DEBUG
+    org.springframework.jdbc.core.jdbcTemplate: DEBUG

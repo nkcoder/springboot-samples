@@ -41,6 +41,4 @@ public class UserController {
     log.info("username: {}", user.getUsername());
     return user.getUsername();
   }
-
-
 }
