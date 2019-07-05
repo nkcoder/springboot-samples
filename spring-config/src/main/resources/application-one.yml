@@ -1,0 +1,36 @@
+logging:
+  level:
+    root: info
+app:
+  name: spring config demo
+
+---
+spring:
+  profiles: local
+  datasource:
+    url: jdbc:mysql://localhost/test
+    username: test
+    password: passwd
+    driver-class-name: com.mysql.jdbc.Driver
+
+logging:
+  level:
+    root: debug
+---
+spring:
+  profiles: dev
+  datasource:
+    url: jdbc:mysql://localhost/test
+    username: test
+    password: passwd
+    driver-class-name: com.mysql.jdbc.Driver
+---
+spring:
+  profiles: prod
+  datasource:
+    url: jdbc:mysql://localhost/test
+    username: test
+    password: passwd
+    driver-class-name: com.mysql.jdbc.Driver
+
+

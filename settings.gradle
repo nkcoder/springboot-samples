@@ -5,4 +5,5 @@ include 'form-validation'
 include 'spring-jpa'
 include 'spring-cache'
 include 'spring-security'
+include 'spring-config'
 

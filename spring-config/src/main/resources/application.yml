@@ -1,0 +1,31 @@
+app.name: spring-config-demo
+
+spring:
+  datasource:
+    url: jdbc:mysql://localhost/test
+    username: test
+    password: passwd
+    driver-class-name: com.mysql.jdbc.Driver
+    schema:
+      - classpath: sql/org-schema.sql
+      - classpath: sql/user-schema.sql
+    data:
+      - classpath: sql/fill-data.sql
+
+# ssl config: jks format
+server:
+  port: 8443
+  ssl:
+    key-store: classpath:keystore/mykeys.jks
+    key-store-password: admin123
+    key-password: admin123
+
+logging:
+  level:
+    root: INFO
+    org.springframework.security: DEBUG
+  #path: /Users/ling.guo/
+  file:
+    max-history: 5
+    max-size: 10MB
+
