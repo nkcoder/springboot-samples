@@ -52,7 +52,6 @@ public class CacheConfiguration {
   }
 
   private CaffeineCache buildCache(String name, CacheSpec cacheSpec, Ticker ticker) {
-    System.out.println("hello....");
     Caffeine<Object, Object> cacheBuilder = Caffeine.newBuilder()
         .expireAfterWrite(cacheSpec.getExpireAfterWrite(), TimeUnit.SECONDS)
         .maximumSize(cacheSpec.getMaximumSize())

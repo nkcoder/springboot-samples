@@ -13,5 +13,6 @@ spring:
 
 logging:
   level:
-    org.hibernate.SQL: DEBUG
-    org.springframework.jdbc.core.jdbcTemplate: DEBUG
+    root: info
+    org.hibernate.SQL: debug
+    org.springframework.jdbc.core.jdbcTemplate: debug

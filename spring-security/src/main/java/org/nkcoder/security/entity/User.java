@@ -1,7 +1,7 @@
 package org.nkcoder.security.entity;
 
-import java.util.Arrays;
 import java.util.Collection;
+import java.util.Collections;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import lombok.AccessLevel;
@@ -29,12 +29,12 @@ public class User implements UserDetails {
 
   @Override
   public Collection<? extends GrantedAuthority> getAuthorities() {
-    return Arrays.asList(new SimpleGrantedAuthority("ROLE_USER"));
+    return Collections.singletonList(new SimpleGrantedAuthority("ROLE_USER"));
   }
 
   @Override
   public String getPassword() {
-    return null;
+    return password;
   }
 
   @Override
