@@ -2,11 +2,13 @@ package org.nkcoder.security.service;
 
 import org.nkcoder.security.entity.User;
 import org.nkcoder.security.repository.UserRepository;
+import org.springframework.context.annotation.Primary;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
+@Primary
 @Service
 public class UserServiceImpl implements UserDetailsService {
 

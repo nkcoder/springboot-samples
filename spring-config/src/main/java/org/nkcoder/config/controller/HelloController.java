@@ -24,8 +24,8 @@ public class HelloController {
   }
 
   @GetMapping("/config")
-  public String getConfigs() {
-    return configService.printUserInfo();
+  public String getConfigInfo() {
+    return configService.getConfigInfo();
   }
 
 

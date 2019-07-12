@@ -21,6 +21,7 @@ public class MemorySecurityConfig extends WebSecurityConfigurerAdapter {
         .and()
         .withUser("durant")
         .password("{noop}123456")
+        .roles("ADMIN")
         .authorities("USER");
   }
 

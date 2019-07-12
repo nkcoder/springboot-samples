@@ -22,7 +22,7 @@ public class ConfigService {
     this.objectMapper = objectMapper;
   }
 
-  public String printUserInfo() {
+  public String getConfigInfo() {
     log.info("appName: {}, mail config: {}", appName, mailConfig.toString());
     try {
       return objectMapper.writeValueAsString(mailConfig.toString());
