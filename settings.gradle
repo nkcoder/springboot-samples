@@ -6,4 +6,5 @@ include 'spring-jpa'
 include 'spring-cache'
 include 'spring-security'
 include 'spring-config'
+include 'spring-data-rest'
 

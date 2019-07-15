@@ -1,0 +1,7 @@
+logging.level.web: DEBUG
+spring.jpa.hibernate.ddl-auto: none
+
+spring:
+  data:
+    rest:
+      base-path: /api
