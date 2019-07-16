@@ -1,0 +1,10 @@
+spring:
+  jms:
+    template:
+      default-destination: test
+
+  artemis:
+    host: localhost
+    port: 61616
+    user: root
+    password: 123admin
