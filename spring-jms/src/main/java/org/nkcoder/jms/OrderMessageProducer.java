@@ -23,15 +23,15 @@ public class OrderMessageProducer {
   public void send(Order order) {
     jmsTemplate.send(session -> session.createObjectMessage(order));
     jmsTemplate.send(orderQueue, session -> session.createObjectMessage(order));
-    jmsTemplate.send(QueueConfig.ORDER_QUEUE, session -> session.createObjectMessage(order));
+    jmsTemplate.send(DestinationConfig.ORDER_QUEUE, session -> session.createObjectMessage(order));
 
     log.info("send order message: {} to queue", order);
   }
 
   public void convertAndSend(Order order) {
-    jmsTemplate.convertAndSend(orderQueue);
+    jmsTemplate.convertAndSend(order);
     jmsTemplate.convertAndSend(orderQueue, order);
-    jmsTemplate.convertAndSend(QueueConfig.ORDER_QUEUE, order);
+    jmsTemplate.convertAndSend(DestinationConfig.ORDER_QUEUE, order);
 
     log.info("convert and send message: {} to queue", order);
   }

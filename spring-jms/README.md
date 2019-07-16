@@ -1,4 +1,4 @@
-## Run activemq-Artemis locally
+## 在docker中运行activemq-Artemis
 
     $ docker pull vromero/activemq-artemis:latest-alpine
     $ docker run -it --rm -e ARTEMIS_USERNAME=root -e ARTEMIS_PASSWORD=123admin -p 8161:8161 -p 61616:61616 vromero/activemq-artemis:latest-alpine
@@ -68,7 +68,52 @@ jmsTemplate.convertAndSend(orderQueue, message -> {
 
 ## 消息接收
 
-接收消息分为两种模式，
+接收消息分为两种模式，`PULL`和`PUSH`。
+
+`PULL`：消费者主动去拉取消息，如果没有消息，带超时阻塞，比较适合消费者希望主动控制消息的消费。
+`PUSH`: 消费者监听在队列上，有消息时，可以接收到，比较适合可以快速处理大量的消息。
+
+JMS提供的消息接收方法都是基于`PULL`模式的，主要方法有：
+
+```java
+Message receive() throws JmsException;
+Message receive(Destination destination) throws JmsException;
+Message receive(String destinationName) throws JmsException;
+
+Object receiveAndConvert() throws JmsException;
+Object receiveAndConvert(Destination destination) throws JmsException;
+Object receiveAndConvert(String destinationName) throws JmsException;
+```
+
+如果使用第一组`receive()`方法，则需要使用`MessageConverter`将Message转换为对应的消息模型，如：
+
+```java
+private final MessageConverter messageConverter;
+
+Message message = jmsTemplate.receive();
+Order order = (Order) messageConverter.fromMessage(message);
+```
+
+使用`@JmsListener`，可以实现基于`PUSH`模型的消息消费，如：
+
+```java
+@Component
+public class OrderMessageListener {
+
+  @JmsListener(destination = DestinationConfig.ORDER_QUEUE)
+  public void listen(Order order) {
+    log.info("listener receive a message: {} from queue: {}", order, DestinationConfig.ORDER_QUEUE);
+  }
+
+}
+```
+
+
+
+
+
+
+
 
 
 

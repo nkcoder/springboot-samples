@@ -23,6 +23,7 @@ public class OrderController {
   public void produce() {
     Random random = new Random();
     final int bound = 1000;
+    messageProducer.convertAndSend(newOrder(UUID.randomUUID(), random.nextInt(bound)));
     messageProducer
         .convertAndSendWithPostProcess(newOrder(UUID.randomUUID(), random.nextInt(bound)));
   }

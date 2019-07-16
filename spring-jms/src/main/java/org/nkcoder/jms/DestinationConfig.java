@@ -8,7 +8,7 @@ import org.springframework.jms.support.converter.MessageConverter;
 import org.springframework.jms.support.converter.SimpleMessageConverter;
 
 @Configuration
-public class QueueConfig {
+public class DestinationConfig {
 
   public static final String ORDER_QUEUE = "order.queue";
 

@@ -34,8 +34,8 @@ public class OrderMessageConsumer {
   }
 
   public Order receiveAndConvert() {
-    Order order = (Order) jmsTemplate.receiveAndConvert(QueueConfig.ORDER_QUEUE);
-    log.info("get message: {} from queue: {}", order, QueueConfig.ORDER_QUEUE);
+    Order order = (Order) jmsTemplate.receiveAndConvert(DestinationConfig.ORDER_QUEUE);
+    log.info("get message: {} from queue: {}", order, DestinationConfig.ORDER_QUEUE);
     return order;
   }
 
