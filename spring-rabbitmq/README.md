@@ -1,6 +1,8 @@
 ## 本地启动 RabbitMQ
 
-    $ docker run -p 5672:5672 -p 15672:15672 --hostname local-rabbitmq --name my-rabbitmq -e RABBITMQ_DEFAULT_USER=root -e RABBITMQ_DEFAULT_PASS=rabbit-pass rabbitmq:3.8-rc-management-alpine
+先定义`docker-compose.yml`文件，然后启动：
+
+    $ docker-compose up
 
 访问控制台：http://localhost:15672
 
