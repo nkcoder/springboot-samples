@@ -7,6 +7,8 @@ import org.springframework.amqp.core.Queue;
 import org.springframework.amqp.core.TopicExchange;
 import org.springframework.amqp.rabbit.connection.ConnectionFactory;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
+import org.springframework.amqp.support.converter.Jackson2JsonMessageConverter;
+import org.springframework.amqp.support.converter.MessageConverter;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -15,7 +17,7 @@ import org.springframework.context.annotation.Configuration;
 public class RabbitmqConfig {
 
   static final String ORDER_QUEUE = "order.queue";
-  static final String STOCK_QUEUE = "stock.queue";
+  static final String ORDER_QUEUE_BAK = "order.queue.bak";
 
   static final String DIRECT_EXCHANGE = "direct-1";
   static final String TOPIC_EXCHANGE = "topic-1";
@@ -26,8 +28,8 @@ public class RabbitmqConfig {
   }
 
   @Bean
-  public Queue stockQueue() {
-    return new Queue(STOCK_QUEUE, false);
+  public Queue orderQueueBak() {
+    return new Queue(ORDER_QUEUE_BAK, false);
   }
 
   @Bean
@@ -53,16 +55,24 @@ public class RabbitmqConfig {
   }
 
   @Bean
-  public Binding topicBinding2(@Qualifier("stockQueue") Queue stockQueue,
+  public Binding topicBinding2(@Qualifier("orderQueueBak") Queue orderQueue,
       @Qualifier("topicExchange") TopicExchange topicExchange) {
-    return BindingBuilder.bind(stockQueue).to(topicExchange).with("order.#");
+    return BindingBuilder.bind(orderQueue).to(topicExchange).with("order.#");
   }
 
+  /**
+   * this bean is needed is send message to default queue.
+   */
   @Bean
   public RabbitTemplate rabbitTemplate(ConnectionFactory connectionFactory) {
     RabbitTemplate rabbitTemplate = new RabbitTemplate(connectionFactory);
     rabbitTemplate.setDefaultReceiveQueue(ORDER_QUEUE);
     return rabbitTemplate;
+  }
+
+  @Bean
+  public MessageConverter messageConverter() {
+    return new Jackson2JsonMessageConverter();
   }
 
 }

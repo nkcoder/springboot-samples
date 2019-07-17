@@ -14,14 +14,6 @@ public class OrderMessageProducer {
     this.rabbitTemplate = rabbitTemplate;
   }
 
-  public void sendToDefault(Order order) {
-    rabbitTemplate.convertAndSend(order);
-    rabbitTemplate.convertAndSend("", order);
-    rabbitTemplate.convertAndSend("", "", order);
-
-    log.info("send message: {} to default exchange", order);
-  }
-
   public void sendToDirect(Order order) {
     rabbitTemplate.convertAndSend(RabbitmqConfig.DIRECT_EXCHANGE, order.getName(), order);
 
