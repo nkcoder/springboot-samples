@@ -9,4 +9,5 @@ include 'spring-config'
 include 'spring-data-rest'
 include 'spring-jms'
 include 'spring-rabbitmq'
+include 'spring-kafka'
 
