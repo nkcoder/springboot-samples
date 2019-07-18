@@ -1,4 +1,4 @@
-rootProject.name = 'spring-demo'
+rootProject.name = 'springboot-examples'
 include 'tdd-demo'
 include 'dev-tools'
 include 'form-validation'
