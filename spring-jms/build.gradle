@@ -1,4 +1,6 @@
 dependencies {
+    implementation("org.springframework.boot:spring-boot-starter-web:$springBootVersion")
+
     implementation group: 'org.springframework.boot', name: 'spring-boot-starter-artemis', version: "$springBootVersion"
 }
 

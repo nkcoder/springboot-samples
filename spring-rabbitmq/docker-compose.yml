@@ -1,12 +1,14 @@
-rabbitmq:
-  image: "rabbitmq:3.8-rc-management-alpine"
-  hostname: "local-rabbitmq"
-  ports:
-    - "15672:15672"
-    - "5672:5672"
-  labels:
-    name: "my-rabbitmq"
-  environment:
-    RABBITMQ_DEFAULT_USER: "root"
-    RABBITMQ_DEFAULT_PASS: "rabbit-pass"
-    RABBITMQ_DEFAULT_VHOST: "/"
+version: "3"
+services:
+  rabbitmq:
+    image: "rabbitmq:3.8-rc-management-alpine"
+    hostname: "local-rabbitmq"
+    ports:
+      - "15672:15672"
+      - "5672:5672"
+    labels:
+      name: "my-rabbitmq"
+    environment:
+      RABBITMQ_DEFAULT_USER: "root"
+      RABBITMQ_DEFAULT_PASS: "rabbit-pass"
+      RABBITMQ_DEFAULT_VHOST: "/"

@@ -49,16 +49,17 @@ subprojects {
 
     ext {
         springBootVersion = '2.1.6.RELEASE'
+        springDataVersion = '2.1.9.RELEASE'
         junitVersion = '5.4.2'
         mysqlVersion = "8.0.15"
         jacksonVersion = '2.9.9'
         lombokVersion = '1.18.8'
         h2Version = '1.4.199'
         kafkaVersion = '2.2.7.RELEASE'
+        reactorVersion = '3.2.10.RELEASE'
     }
 
     dependencies {
-        implementation("org.springframework.boot:spring-boot-starter-web:$springBootVersion")
         implementation("org.projectlombok:lombok:$lombokVersion")
         annotationProcessor("org.projectlombok:lombok:$lombokVersion")
         implementation("com.fasterxml.jackson.core:jackson-databind:$jacksonVersion")

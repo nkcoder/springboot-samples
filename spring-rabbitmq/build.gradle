@@ -1,3 +1,5 @@
 dependencies {
-    compile group: 'org.springframework.boot', name: 'spring-boot-starter-amqp', version: "$springBootVersion"
+    implementation("org.springframework.boot:spring-boot-starter-web:$springBootVersion")
+
+    implementation group: 'org.springframework.boot', name: 'spring-boot-starter-amqp', version: "$springBootVersion"
 }
