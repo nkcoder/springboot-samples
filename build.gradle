@@ -57,6 +57,7 @@ subprojects {
         h2Version = '1.4.199'
         kafkaVersion = '2.2.7.RELEASE'
         reactorVersion = '3.2.10.RELEASE'
+        guavaVersion = '28.0-jre'
     }
 
     dependencies {
@@ -64,6 +65,7 @@ subprojects {
         annotationProcessor("org.projectlombok:lombok:$lombokVersion")
         implementation("com.fasterxml.jackson.core:jackson-databind:$jacksonVersion")
         implementation("com.fasterxml.jackson.module:jackson-module-parameter-names:$jacksonVersion")
+        implementation("com.google.guava:guava:$guavaVersion")
 
         developmentOnly("org.springframework.boot:spring-boot-devtools:$springBootVersion")
 

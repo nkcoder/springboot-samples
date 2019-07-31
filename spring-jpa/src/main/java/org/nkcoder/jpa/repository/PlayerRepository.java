@@ -58,8 +58,4 @@ public interface PlayerRepository extends JpaRepository<Player, Long>,
   @Modifying
   void updateTeamByName(String name, String team);
 
-  /**
-   * find by specification
-   */
-
 }

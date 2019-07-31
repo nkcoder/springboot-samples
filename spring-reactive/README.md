@@ -59,6 +59,8 @@ Processor：数据处理器，作为`Subscriber`获取数据，作为`Publisher`
 
 ## 本地启动 MongoDB
 
+支持 Reactive 模式的存储主要有`Cassandra`，`MongoDB`，`Redis`，这里先以`MongoDB 为例。
+
 本地 docker 启动，`docker-compose.yml`文件内容如下：
 
     version: "3"

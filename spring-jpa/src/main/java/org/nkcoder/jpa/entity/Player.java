@@ -10,19 +10,17 @@ import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
-import lombok.ToString;
 
 @Getter
 @Entity
-@Table(name = "player")    // default to entity name
-@NoArgsConstructor(access = AccessLevel.PRIVATE, force = true)  // JPA need a default constructor
+@Table(name = "player")
+@NoArgsConstructor(access = AccessLevel.PRIVATE, force = true)
 @RequiredArgsConstructor
-@ToString
 public class Player {
 
   @Id
-  @GeneratedValue(strategy = GenerationType.AUTO)
-  private final Long id;
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  private Long id;
 
   private final String name;
 

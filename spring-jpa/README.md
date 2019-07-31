@@ -1,3 +1,5 @@
+# Key Points
+
 要使用 Spring Boot Data JPA，首先添加依赖：
 
     dependencies {
@@ -15,19 +17,21 @@ Spring Boot 默认使用 Hibernate 实现，如果你选择其它实现，比如
 
 ## 创建 Entity 类
 
-首先需要创建实体类：
+首先需要创建实体类，JPA 的实体类需要使用`@Entity`注解，并且需要有一个用`@Id`注解的 id 字段，作为实体对应的数据库表中的记录的唯一标识符。
+`@Table`指定 entity 对应的数据库表的表名，不是必须的，表名默认为 entity 的名字（Spring Boot 会处理名称的映射）。
+JPA 需要一个无参的构造函数，因此使用 lombok 的`@NoArgsConstructor`。
 
 ```java
 @Getter
 @Entity
-@Table(name = "player")    // default to entity name
-@NoArgsConstructor(access = AccessLevel.PRIVATE, force = true)  // JPA need a default constructor
+@Table(name = "player")
+@NoArgsConstructor(access = AccessLevel.PRIVATE, force = true)
 @RequiredArgsConstructor
 public class Player {
 
   @Id
-  @GeneratedValue(strategy = GenerationType.AUTO)
-  private final Long id;
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  private Long id;
 
   private final String name;
 
@@ -38,23 +42,20 @@ public class Player {
 }
 ```
 
-JPA 的实体类需要使用`@Entity`注解，并且需要有一个用`@Id`注解的 id 字段，作为实体对应的数据库表中的记录的唯一标识符。
-`@Table`指定 entity 对应的数据库表的表名，不是必须的，表名默认为 entity 的名字（Spring Boot 会处理名称的映射）。
-JPA 需要一个无参的构造函数，因此使用 lombok 的`@NoArgsConstructor`。
-
 ## 使用 JPA Repository
 
-定义一个接口，继承`Repository`或其某个子类如`CrudRepository`、`JpaRepository`即可，如：
+Spring Data 为`JPA`、`Redis`、`MongoDB`等提供了统一的数据访问层，即`Repository`接口。我们只需要定义一个接口`Repository`或其某个子类，如`CrudRepository`、`JpaRepository`等，Spring Data 会在运行时自动生成该接口的实现。
+
+`CrudRepository`增加了一些基本的 CURD 的方法，`JpaRepository`因为继承了`PagingAndSortingRepository`，额外提供了分页和排序的方法。
+
+`Repository`的第一个参数表示 Entity 的类型，第二个参数表示 Entity 的 ID 的类型。
+
+`@Repository`注解用于 Spring 自动扫描并注册为 Bean，同时将 JPA 的异常转换为`DataAccessException`，因为异常转换是通过 proxy 实现的，所以 Repository 类不能声明为 final 的。
 
 ```java
 @Repository
 public interface PlayerRepository extends CrudRepository<Player, Long> {}
 ```
-
-`CrudRepository`的第一个参数表示 Entity 的类型，第二个参数表示 Entity 的 ID 的类型。
-`CrudRepository`增加了一些基本的 CURD 的方法，`JpaRepository`因为继承了`PagingAndSortingRepository`，额外提供了分页和排序的方法。
-`@Repository`用于 Spring 自动扫描并注册为 Bean，同时将 JPA 的异常转换为`DataAccessException`，因为异常转换是通过 proxy 实现的，所以 Repository 类不能声明为 final 的。
-在运行时，Spring Data JPA 会自动生成该接口的一个实现。
 
 ### Repository 方法签名解析规则
 
@@ -99,29 +100,31 @@ Player readByIdAndBornAtBetween(Long id, LocalDateTime from, LocalDateTime to);
 
 如果通过 Spring Data JPA 解析规则创建的方法不能满足要求或者太麻烦，还可以使用`@Query`通过 SQL 语句自定义查询操作：
 
-```java
-@Query(value = "SELECT p FROM Player p where p.name = :name")
-Player findByNameParam(@Param("name") String name);
-
-@Query(value = "SELECT p FROM Player p where p.name = ?1")
-Player findByName(String name);
-
-@Query(value = "SELECT id, name, team, born_at FROM player where name = ?1", nativeQuery = true)
-Player findByNameNativeQuery(String name);
-
-```
+`@Query`的`nativeQuery`表示这是一个 native 的 SQL 语句。
+`@Param()`可以用于指定命名参数，默认是位置参数。
 
 如果是更新或删除等修改操作，还需要加上`@Modifying`，如：
 
 ```java
-@Query(value = "UPDATE player SET team = ?2 WHERE name = ?1", nativeQuery = true)
-@Modifying
-void updateTeamByName(String name, String team);
+  @Query(value = "SELECT p FROM Player p where p.name = :name")
+  Player findByNameParam(@Param("name") String name);
+
+  @Query(value = "SELECT p FROM Player p where p.name = ?1")
+  Player findByName(String name);
+
+  @Query(value = "SELECT id, name, team, born_at FROM player where name = ?1", nativeQuery = true)
+  Player findByNameNativeQuery(String name);
+
+  @Query(value = "UPDATE player SET team = ?2 WHERE name = ?1", nativeQuery = true)
+  @Modifying
+  void updateTeamByName(String name, String team);
 ```
 
 ### 分页与排序
 
-在所有查询都可以额外接受一个参数，`Pageable`或`Sort`，用于分页和排序。它们不能同时出现，因为`Pageable`已经包含了`Sort`。
+在所有查询都可以额外接受一个参数，`Pageable`或`Sort`，用于分页和排序。但是它们不能同时出现，因为`Pageable`已经包含了`Sort`。
+
+返回值可以是`List<T>`，`Iterable<T>`，以及`Page<T>`，根据实际需要选择其中`Page`的`getContent()`表示该页的内容，`getTotalElements()`表示总的数量。
 
 ```java
 List<Player> findByTeam(String team, Pageable pageable);
@@ -135,8 +138,6 @@ List<Player> findByTeamAndPage(String name, Pageable pageable);
 
 Page<T> findAll(Pageable pageable);
 ```
-
-返回值可以是`List<T>`，`Iterable<T>`，以及`Page<T>`，根据实际需要选择其中`Page`的`getContent()`表示该页的内容，`getTotalElements()`表示总的数量。
 
 ### 使用 Specification 构造可扩展的查询
 
