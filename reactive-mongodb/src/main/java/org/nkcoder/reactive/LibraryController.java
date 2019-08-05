@@ -10,7 +10,7 @@ import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 @RestController
-@RequestMapping(value = "/library", consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
+@RequestMapping(value = "/library")
 public class LibraryController {
 
   private final LibraryRepository libraryRepository;
@@ -25,12 +25,12 @@ public class LibraryController {
   }
 
 
-  @PostMapping("")
+  @PostMapping(value = "", consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
   public Mono<Library> createLibrary(@RequestBody Mono<Library> library) {
     return libraryRepository.insert(library).next();
   }
 
-  @PostMapping("/batch")
+  @PostMapping(value = "/batch", consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
   public Flux<Library> batchCreateLibrary(@RequestBody Flux<Library> libraryFlux) {
     return libraryRepository.insert(libraryFlux);
   }

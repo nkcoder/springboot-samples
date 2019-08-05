@@ -1,20 +1,23 @@
 package org.nkcoder.reactive;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
 import java.util.List;
 import lombok.Getter;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-@Document
 @Getter
+@Document
 public class Library {
 
   @Id
-  private final String id;
+  private String id;
+
   private final List<Book> books;
 
-  public Library(String id, List<Book> books) {
-    this.id = id;
+  @JsonCreator
+  public Library(List<Book> books) {
     this.books = books;
   }
+
 }
