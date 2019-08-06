@@ -59,7 +59,21 @@ Processor：数据处理器，作为`Subscriber`获取数据，作为`Publisher`
 
 ## Spring WebFlux
 
+Spring WebFlux 是 Spring5 增加的对 Reactive 的支持。
 
+Spring MVC 是基于 Servlet 的 web 框架，阻塞，多线程。每个请求从线程池中取出一个线程，请求处理完后，线程释放回线程池，在请求量很大的时候不易扩展，尤其当处理 IO 密集型操作时，线程回阻塞。
+
+Spring Web 是异步非阻塞的框架，使用事件循环，单线程可以处理更多的请求，具有更好的扩展性。
+在事件循环中，一切都被当作事件，比如请求、回调、数据库或网络操作等。
+当一个操作很重时，事件循环为该操作注册一个回调，然后继续处理其它事件，操作完成也被当作一个事件。
+
+Spring WebFlux 与 Spring MVC 的关系如图：![Spring WebFlux](SpringWebFlux.png)
+
+主要关系如下：
+
+- Spring WebFlux 并没有与 Servlet 绑定，所以它不需要 Servlet container，可以运行在任何 non-blocking 的 web container 上，包括 netty、Undertow、Tomcat、Jetty 和 Servlet 3.1 以上。
+- Spring WebFlux 基于 Reactive HTTP API，而不是 Servlet API。Spring WebFlux 默认的嵌入 server 是 netty，而 Spring MVC 为 Tomcat。
+- 在 Controller 层面， 与 Spring MVC 一样，Spring WebFlux 支持基于注解的编程模型，即支持@Controller、@RequestMapping 等注解，同时还提供了基于 RouterFunction 的实现。
 
 ## 开发 Rest Api 示例
 
@@ -87,7 +101,7 @@ Processor：数据处理器，作为`Subscriber`获取数据，作为`Publisher`
 
 ### SpringBoot 配置
 
-Spring 5 用于支持 reactive 的模块为`webflux`, reactive mongodb 对应的依赖为：`spring-boot-starter-data-mongodb-reactive`
+添加 spring-webflux 依赖, reactive mongodb 对应的依赖为：`spring-boot-starter-data-mongodb-reactive`：
 
     implementation group: 'org.springframework.boot', name: 'spring-boot-starter-webflux', version: "$springBootVersion"
     implementation group: 'org.springframework.boot', name: 'spring-boot-starter-data-mongodb-reactive', version: "$springBootVersion"
