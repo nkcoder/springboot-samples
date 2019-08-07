@@ -10,6 +10,13 @@ checkstyle {
     showViolations = true
 }
 
+checkstyleMain {
+    reports {
+        xml.enabled = false
+        html.enabled = true
+    }
+}
+
 tasks.withType(Checkstyle) {
 //    exclude 'xxx/yyy/YourJava.java'
 //    exclude 'xxx/yyy/*'

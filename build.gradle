@@ -42,6 +42,7 @@ subprojects {
 
     apply from: rootProject.file('gradle/checkstyle/checkstyle.gradle')
     apply from: rootProject.file('gradle/spotbugs/spotbugs.gradle')
+    apply from: rootProject.file('gradle/jacoco/jacoco.gradle')
 
     compileJava {
         options.compilerArgs << '-parameters'

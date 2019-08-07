@@ -1,0 +1,57 @@
+apply plugin: 'jacoco'
+
+// reference: https://reflectoring.io/jacoco/
+jacoco {
+    version = '0.8.4'
+    reportsDir = file("${project.buildDir}/reports/jacoco")
+}
+
+jacocoTestReport {
+    reports {
+        xml.enabled false
+        csv.enabled false
+        html.destination file("${project.buildDir}/reports/jacoco/html")
+    }
+}
+
+jacocoTestCoverageVerification {
+    violationRules {
+        rule {
+            element = 'CLASS'
+            includes = [
+                    'io.reflectoring.coverage.part.PartlyCovered'
+            ]
+            limit {
+                counter = 'LINE'
+                value = 'COVEREDRATIO'
+                minimum = 0.8
+            }
+        }
+
+        rule {
+            element = 'CLASS'
+            excludes = [
+                    'io.reflectoring.coverage.part.PartlyCovered',
+                    'io.reflectoring.coverage.ignored.*',
+                    'io.reflectoring.coverage.part.NotCovered'
+            ]
+            limit {
+                counter = 'BRANCH'
+                value = 'COVEREDRATIO'
+                minimum = 0.8
+            }
+        }
+
+        rule {
+            limit {
+                counter = 'CLASS'
+                value = 'COVEREDCOUNT'
+                minimum = 300
+            }
+        }
+    }
+}
+
+check.dependsOn jacocoTestReport
+check.dependsOn jacocoTestCoverageVerification
+
