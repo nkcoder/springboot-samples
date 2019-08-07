@@ -28,11 +28,11 @@ public class RouterFunctionConfig {
   }
 
 
-  public Mono<ServerResponse> allLibraries(ServerRequest request) {
+  private Mono<ServerResponse> allLibraries(ServerRequest request) {
     return ServerResponse.ok().body(libraryRepository.findAll(), Library.class);
   }
 
-  public Mono<ServerResponse> createLibrary(ServerRequest request) {
+  private Mono<ServerResponse> createLibrary(ServerRequest request) {
     Mono<Library> library = request.bodyToMono(Library.class);
     Mono<Library> savedLibrary = libraryRepository.insert(library).next();
     return ServerResponse.created(URI.create("http://localhost:8080/library/id"))

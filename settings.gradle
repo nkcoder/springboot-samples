@@ -11,4 +11,5 @@ include 'spring-jms'
 include 'spring-rabbitmq'
 include 'spring-kafka'
 include 'reactive-mongodb'
+include 'spring-admin'
 
