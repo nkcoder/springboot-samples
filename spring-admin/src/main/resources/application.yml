@@ -1,22 +1,8 @@
-management:
-  endpoints:
-    web:
-      base-path: /actuator
-      exposure:
-        include: '*'
-        exclude: heapdump,threaddump
+server:
+  port: 9090
 
-  endpoint:
-    health:
-      show-details: always
-
-  info:
-    git:
-      mode: full
-
-# for endpoint: /actuator/info
-info:
-  contact:
-    email: myeamil@example.com
-    phone: +86-17100000000
-
+spring:
+  security:
+    user:
+      name: admin
+      password: admin2019

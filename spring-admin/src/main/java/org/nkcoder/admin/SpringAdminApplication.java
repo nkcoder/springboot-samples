@@ -1,13 +1,15 @@
 package org.nkcoder.admin;
 
+import de.codecentric.boot.admin.server.config.EnableAdminServer;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class AdminApplication {
+@EnableAdminServer
+public class SpringAdminApplication {
 
   public static void main(String[] args) {
-    SpringApplication.run(AdminApplication.class, args);
+    SpringApplication.run(SpringAdminApplication.class, args);
   }
 
 }

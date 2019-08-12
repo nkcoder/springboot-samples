@@ -1,0 +1,39 @@
+management:
+  endpoints:
+    web:
+      base-path: /actuator
+      exposure:
+        include: '*'
+        exclude: heapdump,threaddump
+
+  endpoint:
+    health:
+      show-details: always
+
+  info:
+    git:
+      mode: full
+
+# for endpoint: /actuator/info
+info:
+  contact:
+    email: myeamil@example.com
+    phone: +86-17100000000
+
+spring:
+  security:
+    user:
+      name: admin
+      password: 59dkk3d
+
+  # for spring admin
+  application:
+    name: spring-actuator-demo
+  boot:
+    admin:
+      client:
+        url: http://localhost:9090
+        instance:
+          metadata:
+            user.name: ${spring.security.user.name}
+            user.password: ${spring.security.user.password}

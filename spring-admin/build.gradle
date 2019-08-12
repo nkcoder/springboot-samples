@@ -1,15 +1,4 @@
-plugins {
-    id "com.gorylenko.gradle-git-properties" version "2.0.0"
-}
-
-springBoot {
-    buildInfo()
-}
-
 dependencies {
-    implementation("org.springframework.boot:spring-boot-starter-web:$springBootVersion")
-    implementation("org.springframework.boot:spring-boot-starter-actuator:$springBootVersion")
     implementation("org.springframework.boot:spring-boot-starter-security:$springBootVersion")
-
-    developmentOnly("org.springframework.boot:spring-boot-devtools:$springBootVersion")
+    implementation("de.codecentric:spring-boot-admin-starter-server:$springAdminVersion")
 }

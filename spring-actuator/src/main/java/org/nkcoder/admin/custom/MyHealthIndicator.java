@@ -13,10 +13,10 @@ public class MyHealthIndicator implements HealthIndicator {
   public Health health() {
     int hour = LocalDateTime.now().getHour();
 
-    if (hour < 12) {
+    if (hour < 10) {
       return Health.outOfService()
           .status(Status.OUT_OF_SERVICE)
-          .withDetail("reason", "I'm out of service after lunch time.")
+          .withDetail("reason", "I'm out of service after 10 AM.")
           .withDetail("hour", hour)
           .build();
     }

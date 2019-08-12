@@ -59,6 +59,7 @@ subprojects {
         kafkaVersion = '2.2.7.RELEASE'
         reactorVersion = '3.2.10.RELEASE'
         guavaVersion = '28.0-jre'
+        springAdminVersion = '2.1.6'
     }
 
     dependencies {
