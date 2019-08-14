@@ -1,3 +1,22 @@
+spring:
+  security:
+    user:
+      name: admin
+      password: 59dkk3d
+
+  application:
+    name: spring-actuator-demo
+
+  # for spring admin
+  boot:
+    admin:
+      client:
+        url: http://localhost:9090
+        instance:
+          metadata:
+            user.name: ${spring.security.user.name}
+            user.password: ${spring.security.user.password}
+
 management:
   endpoints:
     web:
@@ -5,6 +24,10 @@ management:
       exposure:
         include: '*'
         exclude: heapdump,threaddump
+    jmx:
+      exposure:
+        include: '*'
+        exclude: threaddump,heapdump
 
   endpoint:
     health:
@@ -20,20 +43,3 @@ info:
     email: myeamil@example.com
     phone: +86-17100000000
 
-spring:
-  security:
-    user:
-      name: admin
-      password: 59dkk3d
-
-  # for spring admin
-  application:
-    name: spring-actuator-demo
-  boot:
-    admin:
-      client:
-        url: http://localhost:9090
-        instance:
-          metadata:
-            user.name: ${spring.security.user.name}
-            user.password: ${spring.security.user.password}

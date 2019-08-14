@@ -121,3 +121,71 @@ http.requestMatcher(EndpointRequest.toAnyEndpoint().excluding("health", "info"))
   .authorizeRequests().anyRequest().hasRole("ADMIN")
   .and().httpBasic();
 ```
+
+## JMX
+
+默认情况下，除了`/heapdump`外，所有的 endpoint 都被暴露为 MBeans，可以通过 JMX 查看。
+
+与 HTTP 类似，endpoint 的暴露可以通过属性配置：
+
+```text
+management:
+  endpoints:
+    jmx:
+      exposure:
+        include: '*'
+        exclude: threaddump,heapdump
+```
+
+也可以自定义 MBean，只需要将对应的 bean 使用`@ManagedResource`，并将需要暴露的属性用`@ManagedAttribute`，需要暴露的方法使用`@ManagedOperation`注解即可。
+
+MBean 状态的变化，需要 JMX 客户端通过 PULL 的方式主动拉取，Spring 也支持通过`NotificationPublisher`主动将变化 PUSH 给 JMX 客户端，只需要实现`NotificationPublisherAware`接口，并发送 Notification。JMX 客户端需要 Subscribe。
+
+```java
+import java.util.concurrent.atomic.AtomicInteger;
+import javax.management.Notification;
+import org.springframework.jmx.export.annotation.ManagedAttribute;
+import org.springframework.jmx.export.annotation.ManagedOperation;
+import org.springframework.jmx.export.annotation.ManagedResource;
+import org.springframework.jmx.export.notification.NotificationPublisher;
+import org.springframework.jmx.export.notification.NotificationPublisherAware;
+import org.springframework.stereotype.Component;
+
+@Component
+@ManagedResource
+public class MyCounterMbean implements NotificationPublisherAware {
+
+  private AtomicInteger counter;
+  private NotificationPublisher notificationPublisher;
+
+  public MyCounterMbean() {
+    this.counter = new AtomicInteger(0);
+  }
+
+  @ManagedAttribute
+  public int getCount() {
+    return counter.get();
+  }
+
+  @ManagedOperation
+  public int increment(int delta) {
+    int value = counter.addAndGet(delta);
+    if (value % 5 == 0) {
+      notificationPublisher.sendNotification(new Notification(
+          "my.counter",
+          this,
+          value,
+          "current value: " + value
+      ));
+    }
+
+    return value;
+  }
+
+  @Override
+  public void setNotificationPublisher(NotificationPublisher notificationPublisher) {
+    this.notificationPublisher = notificationPublisher;
+  }
+
+}
+```
