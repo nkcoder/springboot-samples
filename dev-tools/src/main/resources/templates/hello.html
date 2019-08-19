@@ -1,6 +1,6 @@
 <html xmlns:th="http://www.w3.org/1999/xhtml">
   <body>
-    <h1>hello, world, come on at 1746</h1>
+    <h1>hello, <span th:text="${message}">message</span> </h1>
     <img th:src="@{/images/world.jpeg}"/>
   </body>
 </html>
