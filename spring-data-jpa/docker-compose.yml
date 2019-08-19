@@ -18,9 +18,9 @@ services:
       dockerfile: dockerfile
     restart: always
     environment:
-      spring_datasource_url: jdbc:mysql://db:3306/test_demo
-      spring_datasource_username: root
-      spring_datasource_password: pass2019
+      SPRING_DATASOURCE_URL: jdbc:mysql://db:3306/test_demo
+      SPRING_DATASOURCE_USERNAME: root
+      SPRING_DATASOURCE_PASSWORD: pass2019
     ports:
       - "8080:8080"
     networks:
