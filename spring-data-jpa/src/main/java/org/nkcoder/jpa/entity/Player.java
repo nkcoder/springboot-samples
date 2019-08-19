@@ -20,12 +20,12 @@ public class Player {
 
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
-  private Long id;
+  private Integer id;
 
   private final String name;
 
-  private final String team;
+  private final Integer teamId;
 
-  private final LocalDateTime bornAt;
+  private final LocalDateTime joinAt;
 
 }

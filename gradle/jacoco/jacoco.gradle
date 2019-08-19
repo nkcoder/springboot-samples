@@ -2,7 +2,7 @@ apply plugin: 'jacoco'
 
 // reference: https://reflectoring.io/jacoco/
 jacoco {
-    version = '0.8.4'
+    toolVersion = '0.8.4'
     reportsDir = file("${project.buildDir}/reports/jacoco")
 }
 

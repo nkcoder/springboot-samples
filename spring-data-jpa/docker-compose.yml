@@ -1,0 +1,32 @@
+version: '3.1'
+services:
+  db:
+    image: mysql
+    command: --default-authentication-plugin=mysql_native_password
+    restart: always
+    environment:
+      MYSQL_USER: root
+      MYSQL_ROOT_PASSWORD: pass2019
+    ports:
+      - "3306:3306"
+    networks:
+      - backend
+
+  web:
+    build:
+      context: .
+      dockerfile: dockerfile
+    restart: always
+    environment:
+      spring_datasource_url: jdbc:mysql://db:3306/test_demo
+      spring_datasource_username: root
+      spring_datasource_password: pass2019
+    ports:
+      - "8080:8080"
+    networks:
+      - backend
+    depends_on:
+      - db
+
+networks:
+  backend:

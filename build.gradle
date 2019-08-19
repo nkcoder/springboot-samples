@@ -60,6 +60,7 @@ subprojects {
         reactorVersion = '3.2.10.RELEASE'
         guavaVersion = '28.0-jre'
         springAdminVersion = '2.1.6'
+        flyway = '5.2.4'
     }
 
     dependencies {

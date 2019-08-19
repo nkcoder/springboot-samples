@@ -9,13 +9,13 @@ public class PlaySpecification {
   public static Specification<Player> bornAtYearsAgo(int years) {
     return (Specification<Player>) (root, query, criteriaBuilder) -> {
       LocalDateTime yearsAgo = LocalDateTime.now().minusYears(years);
-      return criteriaBuilder.greaterThan(root.get("bornAt"), yearsAgo);
+      return criteriaBuilder.greaterThan(root.get("joinAt"), yearsAgo);
     };
   }
 
   public static Specification<Player> teamEquals(String team) {
     return (Specification<Player>) (root, query, builder) ->
-        builder.equal(root.get("team"), team);
+        builder.equal(root.get("teamId"), team);
   }
 
 }
