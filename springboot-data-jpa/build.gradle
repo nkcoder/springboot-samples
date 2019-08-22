@@ -8,5 +8,8 @@ dependencies {
 
     implementation("org.springframework.boot:spring-boot-starter-data-jpa:$springBootVersion")
     implementation("org.flywaydb:flyway-core:${flyway}")
+    implementation("org.springframework.boot:spring-boot-starter-data-rest:$springBootVersion")
     implementation("mysql:mysql-connector-java:${mysqlVersion}")
+
+    runtime("com.h2database:h2:$h2Version")
 }

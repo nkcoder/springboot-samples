@@ -5,6 +5,7 @@ services:
     command: --default-authentication-plugin=mysql_native_password
     restart: always
     environment:
+      MYSQL_DATABASE: test_db
       MYSQL_USER: root
       MYSQL_ROOT_PASSWORD: pass2019
     ports:
@@ -18,7 +19,7 @@ services:
       dockerfile: dockerfile
     restart: always
     environment:
-      SPRING_DATASOURCE_URL: jdbc:mysql://db:3306/test_demo
+      SPRING_DATASOURCE_URL: jdbc:db://db:3306/test_db
       SPRING_DATASOURCE_USERNAME: root
       SPRING_DATASOURCE_PASSWORD: pass2019
     ports:

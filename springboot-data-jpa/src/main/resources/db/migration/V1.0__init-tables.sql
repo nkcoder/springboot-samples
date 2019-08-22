@@ -12,6 +12,6 @@ CREATE TABLE IF NOT EXISTS team
     id         INT AUTO_INCREMENT,
     name       VARCHAR(64) NOT NULL,
     location   varchar(128) DEFAULT '',
-    founded_at DATE ,
+    founded_at DATE,
     PRIMARY KEY (id)
 ) ENGINE = INNODB;

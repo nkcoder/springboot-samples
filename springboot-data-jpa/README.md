@@ -1,12 +1,6 @@
-# Key Points
+# SpringBoot Data JPA
 
-要使用 Spring Boot Data JPA，首先添加依赖：
-
-    dependencies {
-        implementation("org.springframework.boot:spring-boot-starter-data-jpa:$springBootVersion")
-    }
-
-Spring Boot 默认使用 Hibernate 实现，如果你选择其它实现，比如`eclipselink`，则需要在依赖中排除 Hibernate，并添加 `eclipselink`：
+JPA只是一个规范，Spring Boot 默认使用 Hibernate 实现，如果你选择其它实现，比如`eclipselink`，则需要在依赖中排除 Hibernate，并添加 `eclipselink`：
 
     dependencies {
         implementation("org.springframework.boot:spring-boot-starter-data-jpa:$springBootVersion") {

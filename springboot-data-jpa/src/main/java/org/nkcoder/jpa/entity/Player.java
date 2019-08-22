@@ -1,6 +1,6 @@
 package org.nkcoder.jpa.entity;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -24,8 +24,8 @@ public class Player {
 
   private final String name;
 
-  private final Integer teamId;
+  private final String teamId;
 
-  private final LocalDateTime joinAt;
+  private final LocalDate joinAt;
 
 }
