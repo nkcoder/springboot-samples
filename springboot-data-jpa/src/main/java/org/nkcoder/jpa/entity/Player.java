@@ -24,7 +24,7 @@ public class Player {
 
   private final String name;
 
-  private final String teamId;
+  private final Integer teamId;
 
   private final LocalDate joinAt;
 
