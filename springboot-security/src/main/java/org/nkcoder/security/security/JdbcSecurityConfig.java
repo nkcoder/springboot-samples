@@ -50,6 +50,27 @@ public class JdbcSecurityConfig extends WebSecurityConfigurerAdapter {
         .and()
         .headers().frameOptions().sameOrigin();
 
+//    http.authorizeRequests()
+//        .antMatchers("/user/**").access("hasAnyAuthority('ADMIN', 'USER')")
+//        .antMatchers("/", "h2-console/**").access("permitAll")
+//
+//        .and()
+//        .formLogin()
+//        .loginPage("/login")
+//
+//        .and()
+//        .logout()
+//        .logoutUrl("/logout")
+//
+//        .and()
+//        .formLogin()
+//
+//        .and()
+//        .httpBasic();
+//
+//    http.csrf().disable();
+
+
   }
 
   @Bean

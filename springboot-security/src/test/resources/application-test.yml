@@ -17,4 +17,4 @@ logging:
     org.springframework.jdbc.core.jdbcTemplate: debug
 
 auth:
-  store: jdbc
+  store: memory

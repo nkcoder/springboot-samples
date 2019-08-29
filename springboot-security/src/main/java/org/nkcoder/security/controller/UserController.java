@@ -1,7 +1,6 @@
 package org.nkcoder.security.controller;
 
 import java.security.Principal;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -12,33 +11,27 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/user")
-@Slf4j
 public class UserController {
 
   @GetMapping("/principal")
-  public String getUserByPrincipal(Principal principal) {
-    log.info("username: {}", principal.getName());
-    return principal.getName();
+  public Principal getUserByPrincipal(Principal principal) {
+    return principal;
   }
 
   @GetMapping("/authentication")
-  public String getUserByAuthentication(Authentication authentication) {
-    String userName = ((User) authentication.getPrincipal()).getUsername();
-    log.info("username: {}, authority: {}", userName, authentication.getAuthorities());
-    return userName;
+  public Principal getUserByAuthentication(Authentication authentication) {
+    return authentication;
   }
 
   @GetMapping("/auth-principal")
-  public String getUserByAuthPrincipal(@AuthenticationPrincipal User user) {
-    log.info("username: {}", user.getUsername());
-    return user.getUsername();
+  public User getUserByAuthPrincipal(@AuthenticationPrincipal User user) {
+    return user;
   }
 
   @GetMapping("/security-context")
-  public String getUserBySecurityContext() {
+  public Principal getUserBySecurityContext() {
     Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-    User user = (User) authentication.getPrincipal();
-    log.info("username: {}", user.getUsername());
-    return user.getUsername();
+    return authentication;
   }
+
 }

@@ -1,11 +1,13 @@
 package org.nkcoder.security.repository;
 
 import org.nkcoder.security.entity.User;
-import org.springframework.data.repository.CrudRepository;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface UserRepository extends CrudRepository<User, Long> {
+@ConditionalOnProperty(name = "auth.store", havingValue = "service")
+public interface UserRepository extends JpaRepository<User, Long> {
 
   User findByUsername(String name);
 
