@@ -1,5 +1,6 @@
 package org.nkcoder.config.controller;
 
+import java.util.List;
 import org.nkcoder.config.service.ConfigService;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -9,23 +10,23 @@ import org.springframework.web.bind.annotation.RestController;
  * use https
  */
 @RestController
-@RequestMapping("/hello")
-public class HelloController {
+@RequestMapping("/config")
+public class ConfigController {
 
   private final ConfigService configService;
 
-  public HelloController(ConfigService configService) {
+  public ConfigController(ConfigService configService) {
     this.configService = configService;
   }
 
-  @GetMapping
-  public String hello() {
-    return "hello, world";
+  @GetMapping("/app-name")
+  public String getAppName() {
+    return configService.getAppName();
   }
 
-  @GetMapping("/config")
-  public String getConfigInfo() {
-    return configService.getConfigInfo();
+  @GetMapping("/mail")
+  public List<String> getMailRecipients() {
+    return configService.getMailRecipients();
   }
 
 

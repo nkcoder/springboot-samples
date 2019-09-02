@@ -14,12 +14,12 @@ mail:
     header1: one
     header2: two
 
-  # class member config
+  # object config
   credentials:
     name: kobe
     password: passwd
 
-  # map class config
+  # object map config
   member-credentials:
     kobe:
       name: kb

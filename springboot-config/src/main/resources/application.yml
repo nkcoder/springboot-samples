@@ -5,7 +5,7 @@ spring:
     url: jdbc:mysql://localhost/test
     username: test
     password: passwd
-    driver-class-name: com.mysql.jdbc.Driver
+    driver-class-name: com.mysql.cj.jdbc.Driver
     schema:
       - classpath: sql/org-schema.sql
       - classpath: sql/user-schema.sql
@@ -20,12 +20,18 @@ server:
     key-store-password: admin123
     key-password: admin123
 
+
 logging:
   level:
     root: INFO
     org.springframework.security: DEBUG
-  #path: /Users/ling.guo/
-  file:
-    max-history: 5
-    max-size: 10MB
+  file.max-size: 10MB
+  file.max-history: 5
+  file: config.log
+
+#  path: /var/tmp
+#  file:
+#    max-history: 5
+#    max-size: 10MB
+
 

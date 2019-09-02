@@ -1,9 +1,9 @@
 package org.nkcoder.config.service;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
+import java.util.List;
 import lombok.extern.slf4j.Slf4j;
-import org.nkcoder.config.property.MailConfig;
+import org.nkcoder.config.config.MailConfigByProperties;
+import org.nkcoder.config.config.MailConfigByYml;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
@@ -12,24 +12,24 @@ import org.springframework.stereotype.Service;
 public class ConfigService {
 
   private final String appName;
-  private final MailConfig mailConfig;
-  private final ObjectMapper objectMapper;
+  private final MailConfigByProperties mailConfig;
+  private final MailConfigByYml mailConfigByYml;
 
-  public ConfigService(@Value("${app.name}") String appName, MailConfig mailConfig,
-      ObjectMapper objectMapper) {
+  public ConfigService(@Value("${app.name}") String appName, MailConfigByProperties mailConfig,
+      MailConfigByYml mailConfigByYml) {
     this.appName = appName;
     this.mailConfig = mailConfig;
-    this.objectMapper = objectMapper;
+    this.mailConfigByYml = mailConfigByYml;
   }
 
-  public String getConfigInfo() {
+  public String getAppName() {
+    return appName;
+  }
+
+  public List<String> getMailRecipients() {
     log.info("appName: {}, mail config: {}", appName, mailConfig.toString());
-    try {
-      return objectMapper.writeValueAsString(mailConfig.toString());
-    } catch (JsonProcessingException e) {
-      log.error(e.getMessage(), e);
-      throw new RuntimeException("config error");
-    }
+    log.info("appName: {}, mail config by yml: {}", appName, mailConfigByYml.toString());
+    return mailConfig.getDefaultRecipients();
   }
 
 }

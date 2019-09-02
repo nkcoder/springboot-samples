@@ -1,4 +1,4 @@
-package org.nkcoder.config.property;
+package org.nkcoder.config.config;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;

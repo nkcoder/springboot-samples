@@ -1,4 +1,4 @@
-package org.nkcoder.config.property;
+package org.nkcoder.config.config;
 
 import java.util.List;
 import java.util.Map;
@@ -9,9 +9,9 @@ import org.springframework.context.annotation.PropertySource;
 
 @Data
 @Configuration
-@PropertySource(value = "classpath:mail-config.yml", factory = YamlPropertySourceFactory.class)
-@ConfigurationProperties(prefix = "mail")
-public class MailConfig {
+@ConfigurationProperties(prefix = "mail2")
+@PropertySource(value = "classpath:mail-config.properties")
+public class MailConfigByProperties {
 
   private String host;
   private int port;
@@ -23,9 +23,7 @@ public class MailConfig {
 
   @Data
   public static class Credentials {
-
     private String name;
     private String password;
   }
-
 }

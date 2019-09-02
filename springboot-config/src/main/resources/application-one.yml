@@ -11,7 +11,7 @@ spring:
     url: jdbc:mysql://localhost/test
     username: test
     password: passwd
-    driver-class-name: com.mysql.jdbc.Driver
+    driver-class-name: com.mysql.cj.jdbc.Driver
 
 logging:
   level:
@@ -23,7 +23,7 @@ spring:
     url: jdbc:mysql://localhost/test
     username: test
     password: passwd
-    driver-class-name: com.mysql.jdbc.Driver
+    driver-class-name: com.mysql.cj.jdbc.Driver
 ---
 spring:
   profiles: prod
@@ -31,6 +31,6 @@ spring:
     url: jdbc:mysql://localhost/test
     username: test
     password: passwd
-    driver-class-name: com.mysql.jdbc.Driver
+    driver-class-name: com.mysql.cj.jdbc.Driver
 
 

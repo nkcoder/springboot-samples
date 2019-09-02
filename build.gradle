@@ -51,6 +51,8 @@ subprojects {
     ext {
         springBootVersion='2.1.6.RELEASE'
         springDataVersion='2.1.9.RELEASE'
+        springSecurityVersion='5.1.6.RELEASE'
+        springAdminVersion='2.1.6'
         junitVersion='5.4.2'
         mysqlVersion="8.0.15"
         jacksonVersion='2.9.9'
@@ -59,9 +61,8 @@ subprojects {
         kafkaVersion='2.2.7.RELEASE'
         reactorVersion='3.2.10.RELEASE'
         guavaVersion='28.0-jre'
-        springAdminVersion='2.1.6'
         flyway='5.2.4'
-        springSecurityVersion='5.1.6.RELEASE'
+        mockitoVersion='3.0.0'
     }
 
     dependencies {
@@ -74,6 +75,7 @@ subprojects {
         developmentOnly("org.springframework.boot:spring-boot-devtools:$springBootVersion")
 
         testImplementation("org.junit.jupiter:junit-jupiter:$junitVersion")
+        testImplementation("org.mockito:mockito-junit-jupiter:${mockitoVersion}")
         testImplementation("org.springframework.boot:spring-boot-starter-test:$springBootVersion") {
             exclude group: 'junit', module: 'junit'
         }
