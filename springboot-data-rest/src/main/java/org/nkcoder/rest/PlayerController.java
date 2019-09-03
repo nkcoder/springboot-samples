@@ -25,19 +25,18 @@ public class PlayerController {
     this.playerRepository = playerRepository;
   }
 
-
   @GetMapping("/players/by-team")
-  public Resources<Resource<Player>> getByTeamAndBornAtDesc(@RequestParam("team") String team) {
-    Iterable<Player> playersIterable = playerRepository.findAll(Sort.by(Order.desc("bornAt")));
+  public Resources<Resource<Player>> getByTeamAndJoinAtDesc(
+      @RequestParam("teamId") Integer teamId) {
+    Iterable<Player> playersIterable = playerRepository.findAll(Sort.by(Order.desc("joinAt")));
     List<Player> players = StreamSupport.stream(playersIterable.spliterator(), false)
-        .filter(p -> p.getTeam().equals(team))
+        .filter(p -> p.getTeamId().equals(teamId))
         .collect(Collectors.toList());
 
     Resources<Resource<Player>> playerResources = Resources.wrap(players);
     playerResources.add(
-        linkTo(methodOn(PlayerController.class).getByTeamAndBornAtDesc(team)).withRel("by-team"));
+        linkTo(methodOn(PlayerController.class).getByTeamAndJoinAtDesc(teamId)).withRel("by-team"));
     return playerResources;
   }
-
 
 }

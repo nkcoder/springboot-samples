@@ -224,5 +224,6 @@ playerRepository.findAll(where(bornAtYearsAgo(1)).and(teamEquals("LA")));
 
 ## 参考
 
+- [Spring in Action 5th Edition](https://www.amazon.com/Spring-Action-Craig-Walls/dp/1617294942)
 - [Spring Data JPA - Reference Documentation](https://docs.spring.io/spring-data/jpa/docs/2.1.9.RELEASE/reference/html/#specifications)
 - [REST Query Language with Spring Data JPA Specifications](https://www.baeldung.com/rest-api-search-language-spring-data-specifications)

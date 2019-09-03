@@ -1,6 +1,8 @@
-CREATE TABLE IF NOT EXISTS player (
-    id IDENTITY,
-    name VARCHAR (16),
-    team VARCHAR (8),
-    born_at TIMESTAMP
-);
+CREATE TABLE IF NOT EXISTS player
+(
+    id      INT AUTO_INCREMENT,
+    name    VARCHAR(64) NOT NULL,
+    team_id INT         NOT NULL,
+    join_at DATE,
+    PRIMARY KEY (id)
+) ENGINE = INNODB;

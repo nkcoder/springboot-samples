@@ -1,10 +1,11 @@
-INSERT INTO player VALUES (1, 'Kobe', 'LA', '2019-06-25 10:01:01');
-INSERT INTO player VALUES (2, 'Lebron', 'LA', '2019-06-26 10:01:01');
-INSERT INTO player VALUES (3, 'Durant', 'BR', '2019-06-27 10:01:01');
-INSERT INTO player VALUES (4, 'Curry', 'WA', '2019-06-28 10:01:01');
-INSERT INTO player VALUES (5, 'Davis', 'LA', '2019-06-29 10:01:01');
-INSERT INTO player VALUES (6, 'Wade', 'MI', '2019-07-28 10:01:01');
-INSERT INTO player VALUES (7, 'Kuzma', 'LA', '2019-07-25 10:01:01');
-INSERT INTO player VALUES (8, 'Tompson', 'WA', '2019-07-26 10:01:01');
-INSERT INTO player VALUES (9, 'Green', 'WA', '2019-07-27 10:01:01');
-INSERT INTO player VALUES (10, 'Gasol', 'LA', '2019-07-29 10:01:01');
+INSERT INTO player(`name`, team_id, join_at)
+VALUES ('Kobe', 1, '1996-09-01'),
+       ('Oneal', 1, '1996-07-01'),
+       ('Magic Johnson', 1, '1979-07-01'),
+       ('Chamberlain', 1, '1968-07-09'),
+       ('Abdul-Jabbar', 1, '1974-05-01'),
+       ('Bob Cousy', 2, '1951-09-01'),
+       ('Bill Russell', 2, '1957-08-01'),
+       ('Heinsohn', 2, '1970-03-01'),
+       ('Larry Bird', 2, '1979-06-01'),
+       ('Paul Pierce', 2, '1998-08-01');
