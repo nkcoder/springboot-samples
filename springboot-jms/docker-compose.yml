@@ -1,0 +1,28 @@
+version: '3.1'
+services:
+  mq:
+    image: vromero/activemq-artemis:latest-alpine
+    restart: always
+    environment:
+      ARTEMIS_USERNAME: root
+      ARTEMIS_PASSWORD: 123admin
+    ports:
+      - "8161:8161"
+      - "61616:61616"
+    networks:
+      - backend
+
+  web:
+    build:
+      context: .
+      dockerfile: dockerfile
+    restart: always
+    ports:
+      - "8080:8080"
+    networks:
+      - backend
+    depends_on:
+      - mq
+
+networks:
+  backend:

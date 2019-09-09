@@ -1,30 +1,47 @@
-## 在docker中运行activemq-Artemis
+## 环境配置
 
-    $ docker pull vromero/activemq-artemis:latest-alpine
-    $ docker run -it --rm -e ARTEMIS_USERNAME=root -e ARTEMIS_PASSWORD=123admin -p 8161:8161 -p 61616:61616 vromero/activemq-artemis:latest-alpine
-  
-console:
+Artemis是ActiveMQ的下一代产品，所以我们直接使用Artemis。
 
-    http://localhost:8161/console/login
+首先在容器中启动Artemis服务，参考`docker-compose.yml`中的配置：
+
+```text
+  mq:
+    image: vromero/activemq-artemis:latest-alpine
+    restart: always
+    environment:
+      ARTEMIS_USERNAME: root
+      ARTEMIS_PASSWORD: 123admin
+    ports:
+      - "8161:8161"
+      - "61616:61616"
+    networks:
+      - backend
+```
+
+然后在应用中添加Artemis依赖：
+
+```gradle
+implementation group: 'org.springframework.boot', name: 'spring-boot-starter-artemis', version: "$springBootVersion"
+```
+
+以及需要在`application.yml`中配置连接信息：
+
+```yml
+spring:
+  artemis:
+    host: localhost
+    port: 61616
+    user: root
+    password: 123admin
+
+```
+
+使用上述配置的登录信息,可以通过地址`http://localhost:8161/console/login`登录到Artemis的控制台。
+
     
 ## 消息发送
 
-add dependency in `build.gradle`:
-
-    dependencies {
-        implementation group: 'org.springframework.boot', name: 'spring-boot-starter-artemis', version: "$springBootVersion"
-    }
-    
-add configuration for MQ in `application.yml`:
-
-    spring:
-      artemis:
-        host: localhost
-        port: 61616
-        user: root
-        password: 123admin
-
-Spring Boot JMS提供了`JmsTemplate`的Bean，注入并使用即可。
+SpringBoot JMS提供了`JmsTemplate`的Bean，注入并使用即可。
 
 发送消息的接口主要：
 
@@ -51,12 +68,48 @@ void convertAndSend(String destinationName, Object message, MessagePostProcessor
 
 默认队列需要配置，在`application.yml`中配置如下：
 
-    spring:
-      jms:
-        template:
-          default-destination: test
+```yml
+spring:
+  jms:
+    template:
+      default-destination: test
+```
+
+如何声明新的队列呢，只需要定义一个`Destination`的Bean即可，如：
+
+```java
+@Bean
+public Destination orderQueue() {
+  return new ActiveMQQueue("order_queue");
+}
+```
 
 第二组方法发送的是消息内容，`JmsTemplate`在内部通过`MessageConverter`把会把消息体转成`Message`，然后调用第一组方法`send()`；
+
+`MessageConverter`有四个实现类：
+
+- MappingJackson2MessageConverter：处理JSON
+- MarshallingMessageConverter：处理XML
+- MessagingMessageConverter：处理Message
+- SimpleMessageConverter：处理String、Map、Object等。
+
+SpringBoot默认使用`SimpleMessageConverter`，但是需要对象实现`Serializable`接口。
+
+如果要使用其它的`MessageConverter`，定义一个Bean即可，如：
+
+```java
+@Bean("jsonMessageConverter")
+public MessageConverter jsonMessageConverter() {
+  MappingJackson2MessageConverter messageConverter = new MappingJackson2MessageConverter();
+  messageConverter.setTypeIdPropertyName("_typeId");
+  HashMap<String, Class<?>> typeIdMapping = new HashMap<>();
+  typeIdMapping.put("order", Order.class);
+  return messageConverter;
+}
+```
+
+也可以自定义MessageConverter，只需要实现`MessageConverter`接口即可。
+
 第三组方法发送的也是消息本身，并且支持`MessagePostProcessor`，用于在发送前对消息做一些额外处理，比如：
 
 ```java
@@ -108,7 +161,11 @@ public class OrderMessageListener {
 }
 ```
 
+JMS是Java栈上的不错的选择，但同时也是它的局限性，即仅支持JVM平台和语言。
 
+## 参考
+
+- [Spring in Action 5th Edition](https://www.amazon.com/Spring-Action-Craig-Walls/dp/1617294942)
 
 
 

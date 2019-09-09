@@ -3,6 +3,7 @@ package org.nkcoder.jms;
 import javax.jms.JMSException;
 import javax.jms.Message;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.jms.core.JmsTemplate;
 import org.springframework.jms.support.converter.MessageConverter;
 import org.springframework.stereotype.Service;
@@ -15,7 +16,7 @@ public class OrderMessageConsumer {
   private final MessageConverter messageConverter;
 
   public OrderMessageConsumer(JmsTemplate jmsTemplate,
-      MessageConverter messageConverter) {
+      @Qualifier("simpleMessageConverter") MessageConverter messageConverter) {
     this.jmsTemplate = jmsTemplate;
     this.messageConverter = messageConverter;
   }

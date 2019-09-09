@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/order")
 public class OrderController {
 
+  private static final Random RANDOM = new Random();
+
   private final OrderMessageProducer messageProducer;
   private final OrderMessageConsumer messageConsumer;
 
@@ -21,11 +23,10 @@ public class OrderController {
 
   @GetMapping("/produce")
   public void produce() {
-    Random random = new Random();
     final int bound = 1000;
-    messageProducer.convertAndSend(newOrder(UUID.randomUUID(), random.nextInt(bound)));
+    messageProducer.convertAndSend(newOrder(UUID.randomUUID(), RANDOM.nextInt(bound)));
     messageProducer
-        .convertAndSendWithPostProcess(newOrder(UUID.randomUUID(), random.nextInt(bound)));
+        .convertAndSendWithPostProcess(newOrder(UUID.randomUUID(), RANDOM.nextInt(bound)));
   }
 
   @GetMapping("/consume")

@@ -28,7 +28,7 @@ public class OrderMessageProducer {
     log.info("send order message: {} to queue", order);
   }
 
-  public void convertAndSend(Order order) {
+  void convertAndSend(Order order) {
     jmsTemplate.convertAndSend(order);
     jmsTemplate.convertAndSend(orderQueue, order);
     jmsTemplate.convertAndSend(DestinationConfig.ORDER_QUEUE, order);
@@ -36,10 +36,10 @@ public class OrderMessageProducer {
     log.info("convert and send message: {} to queue", order);
   }
 
-  public void convertAndSendWithPostProcess(Order order) {
+  void convertAndSendWithPostProcess(Order order) {
     jmsTemplate.convertAndSend(orderQueue, order, this::postProcessor);
 
-    log.info("convert and send message with post processor: {} to queue.", order,
+    log.info("convert and send message with post processor: {} to queue: {}.", order,
         ((ActiveMQQueue) orderQueue).getQueueName());
   }
 
