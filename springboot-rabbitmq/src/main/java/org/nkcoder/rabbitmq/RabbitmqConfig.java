@@ -7,8 +7,8 @@ import org.springframework.amqp.core.Queue;
 import org.springframework.amqp.core.TopicExchange;
 import org.springframework.amqp.rabbit.connection.ConnectionFactory;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
-import org.springframework.amqp.support.converter.Jackson2JsonMessageConverter;
 import org.springframework.amqp.support.converter.MessageConverter;
+import org.springframework.amqp.support.converter.SimpleMessageConverter;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -45,19 +45,19 @@ public class RabbitmqConfig {
   @Bean
   public Binding directBinding(@Qualifier("orderQueue") Queue orderQueue,
       @Qualifier("directExchange") DirectExchange directExchange) {
-    return BindingBuilder.bind(orderQueue).to(directExchange).with("order");
+    return BindingBuilder.bind(orderQueue).to(directExchange).with("order.queue");
   }
 
   @Bean
   public Binding topicBinding(@Qualifier("orderQueue") Queue orderQueue,
       @Qualifier("topicExchange") TopicExchange topicExchange) {
-    return BindingBuilder.bind(orderQueue).to(topicExchange).with("order.3");
+    return BindingBuilder.bind(orderQueue).to(topicExchange).with("order.#");
   }
 
   @Bean
   public Binding topicBinding2(@Qualifier("orderQueueBak") Queue orderQueue,
       @Qualifier("topicExchange") TopicExchange topicExchange) {
-    return BindingBuilder.bind(orderQueue).to(topicExchange).with("order.#");
+    return BindingBuilder.bind(orderQueue).to(topicExchange).with("order.");
   }
 
   /**
@@ -72,7 +72,7 @@ public class RabbitmqConfig {
 
   @Bean
   public MessageConverter messageConverter() {
-    return new Jackson2JsonMessageConverter();
+    return new SimpleMessageConverter();
   }
 
 }

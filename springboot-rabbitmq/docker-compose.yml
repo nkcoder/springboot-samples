@@ -1,8 +1,7 @@
-version: "3"
+version: "3.1"
 services:
   rabbitmq:
     image: "rabbitmq:3.8-rc-management-alpine"
-    hostname: "local-rabbitmq"
     ports:
       - "15672:15672"
       - "5672:5672"
@@ -12,3 +11,20 @@ services:
       RABBITMQ_DEFAULT_USER: "root"
       RABBITMQ_DEFAULT_PASS: "rabbit-pass"
       RABBITMQ_DEFAULT_VHOST: "/"
+    networks:
+      - backend
+
+  web:
+    build:
+      context: .
+      dockerfile: dockerfile
+    restart: always
+    ports:
+      - "8080:8080"
+    networks:
+      - backend
+    depends_on:
+      - rabbitmq
+
+networks:
+  backend:

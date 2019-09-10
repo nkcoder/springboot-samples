@@ -148,3 +148,8 @@ public void receive(Order order, Message<Order> message) {
       headers.get(KafkaHeaders.RECEIVED_TIMESTAMP));
 }
 ```
+
+## 参考
+
+- [Spring in Action 5th Edition](https://www.amazon.com/Spring-Action-Craig-Walls/dp/1617294942)
+

@@ -14,13 +14,10 @@ public class OrderMessageConsumer {
     this.rabbitTemplate = rabbitTemplate;
   }
 
-  public void consume() {
-    Order order1 = (Order) rabbitTemplate.receiveAndConvert(RabbitmqConfig.ORDER_QUEUE);
-    log.info("receive message: {} from queue ORDER_QUEUE", order1);
-
-    Order order2 = (Order) rabbitTemplate.receiveAndConvert(RabbitmqConfig.ORDER_QUEUE_BAK);
-    log.info("receive message: {} from queue ORDER_QUEUE_BAK", order2);
-
+  public Order consume(String queue) {
+    Order message = (Order) rabbitTemplate.receiveAndConvert(queue);
+    log.info("receive message: {} from queue ORDER_QUEUE", message);
+    return message;
   }
 
 }

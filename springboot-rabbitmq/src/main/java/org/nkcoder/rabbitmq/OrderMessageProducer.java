@@ -14,14 +14,14 @@ public class OrderMessageProducer {
     this.rabbitTemplate = rabbitTemplate;
   }
 
-  public void sendToDirect(Order order) {
-    rabbitTemplate.convertAndSend(RabbitmqConfig.DIRECT_EXCHANGE, order.getName(), order);
+  public void sendToDirect(Order order, String routingKey) {
+    rabbitTemplate.convertAndSend(RabbitmqConfig.DIRECT_EXCHANGE, routingKey, order);
 
     log.info("send message: {} to exchange: {}", order, RabbitmqConfig.DIRECT_EXCHANGE);
   }
 
-  public void sendToTopic(Order order) {
-    rabbitTemplate.convertAndSend(RabbitmqConfig.TOPIC_EXCHANGE, order.getName(), order);
+  public void sendToTopic(Order order, String routingKey) {
+    rabbitTemplate.convertAndSend(RabbitmqConfig.TOPIC_EXCHANGE, routingKey, order);
 
     log.info("send message: {} to exchange: {}", order, RabbitmqConfig.TOPIC_EXCHANGE);
   }
