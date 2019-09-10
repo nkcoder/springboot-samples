@@ -1,7 +1,7 @@
 spring:
   kafka:
     bootstrap-servers:
-    - 192.168.248.53:9092
+    - 192.168.248.69:9092
     template:
       default-topic: order.topic
 

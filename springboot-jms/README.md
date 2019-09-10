@@ -96,7 +96,7 @@ public Destination orderQueue() {
 SpringBoot默认使用`SimpleMessageConverter`，但是需要对象实现`Serializable`接口。
 
 如果要使用其它的`MessageConverter`，定义一个Bean即可，如：
-
+	
 ```java
 @Bean("jsonMessageConverter")
 public MessageConverter jsonMessageConverter() {

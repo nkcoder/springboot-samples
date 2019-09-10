@@ -1,5 +1,11 @@
+bootJar {
+    archivesBaseName="springboot-kafka"
+    version='1.0'
+}
 dependencies {
     implementation("org.springframework.boot:spring-boot-starter-web:$springBootVersion")
-
     implementation group: 'org.springframework.kafka', name: 'spring-kafka', version: "$kafkaVersion"
+
+    testImplementation("org.springframework.kafka:spring-kafka-test:$kafkaVersion")
+
 }

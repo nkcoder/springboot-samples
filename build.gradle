@@ -58,7 +58,7 @@ subprojects {
         jacksonVersion='2.9.9'
         lombokVersion='1.18.8'
         h2Version='1.4.199'
-        kafkaVersion='2.2.7.RELEASE'
+        kafkaVersion='2.2.8.RELEASE'
         reactorVersion='3.2.10.RELEASE'
         guavaVersion='28.0-jre'
         flyway='5.2.4'
