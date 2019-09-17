@@ -1,5 +1,5 @@
 plugins {
-    id "com.gorylenko.gradle-git-properties" version "2.0.0"
+    id 'com.gorylenko.gradle-git-properties' version '2.0.0'
 }
 
 springBoot {
@@ -11,10 +11,8 @@ ext {
 }
 
 dependencies {
-    implementation "org.springframework.boot:spring-boot-starter-web:$springBootVersion"
-    implementation "org.springframework.boot:spring-boot-starter-actuator:$springBootVersion"
-    implementation "org.springframework.boot:spring-boot-starter-security:$springBootVersion"
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation 'org.springframework.boot:spring-boot-starter-actuator'
+    implementation 'org.springframework.boot:spring-boot-starter-security'
     implementation "de.codecentric:spring-boot-admin-starter-client:$springBootAdminVersion"
-
-    developmentOnly("org.springframework.boot:spring-boot-devtools:$springBootVersion")
 }

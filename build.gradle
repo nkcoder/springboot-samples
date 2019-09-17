@@ -7,26 +7,27 @@ buildscript {
         }
     }
     dependencies {
-        classpath("org.springframework.boot:spring-boot-gradle-plugin:2.0.5.RELEASE")
-        classpath("gradle.plugin.com.github.spotbugs:spotbugs-gradle-plugin:1.7.1")
-        classpath("org.springframework.boot:spring-boot-gradle-plugin:2.1.6.RELEASE")
+        classpath 'gradle.plugin.com.github.spotbugs:spotbugs-gradle-plugin:1.7.1'
+        classpath 'org.springframework.boot:spring-boot-gradle-plugin:2.1.8.RELEASE'
+        classpath 'io.spring.gradle:dependency-management-plugin:1.0.8.RELEASE'
     }
 }
 
 wrapper {
-    gradleVersion='5.6'
+    gradleVersion = '5.6'
 }
 
 subprojects {
     apply plugin: "java"
     apply plugin: "idea"
     apply plugin: "org.springframework.boot"
+    apply plugin: "io.spring.dependency-management"
 
     group 'org.nkcoder'
     version '1.0'
 
-    targetCompatibility=1.11
-    sourceCompatibility=1.11
+    targetCompatibility = 1.11
+    sourceCompatibility = 1.11
 
     repositories {
         mavenCentral()
@@ -37,6 +38,9 @@ subprojects {
         developmentOnly
         runtimeClasspath {
             extendsFrom developmentOnly
+        }
+        compileOnly {
+            extendsFrom annotationProcessor
         }
     }
 
@@ -49,34 +53,22 @@ subprojects {
     }
 
     ext {
-        springBootVersion='2.1.8.RELEASE'
-        springDataVersion='2.1.9.RELEASE'
-        springSecurityVersion='5.1.6.RELEASE'
-        springAdminVersion='2.1.6'
-        junitVersion='5.4.2'
-        mysqlVersion="8.0.15"
-        jacksonVersion='2.9.9'
-        lombokVersion='1.18.8'
-        h2Version='1.4.199'
-        kafkaVersion='2.2.8.RELEASE'
-        reactorVersion='3.2.10.RELEASE'
-        guavaVersion='28.0-jre'
-        flyway='5.2.4'
-        mockitoVersion='3.0.0'
+        guavaVersion = '28.0-jre'
+        jupiterVersion = '5.5.2'
     }
 
     dependencies {
-        implementation("org.projectlombok:lombok:$lombokVersion")
-        annotationProcessor("org.projectlombok:lombok:$lombokVersion")
-        implementation("com.fasterxml.jackson.core:jackson-databind:$jacksonVersion")
-        implementation("com.fasterxml.jackson.module:jackson-module-parameter-names:$jacksonVersion")
-        implementation("com.google.guava:guava:$guavaVersion")
+        compileOnly 'org.projectlombok:lombok'
 
-        developmentOnly("org.springframework.boot:spring-boot-devtools:$springBootVersion")
+        annotationProcessor 'org.projectlombok:lombok'
 
-        testImplementation("org.junit.jupiter:junit-jupiter:$junitVersion")
-        testImplementation("org.mockito:mockito-junit-jupiter:${mockitoVersion}")
-        testImplementation("org.springframework.boot:spring-boot-starter-test:$springBootVersion") {
+        implementation "com.google.guava:guava:$guavaVersion"
+
+        developmentOnly 'org.springframework.boot:spring-boot-devtools'
+
+        testImplementation "org.junit.jupiter:junit-jupiter:${jupiterVersion}"
+        testImplementation 'org.mockito:mockito-junit-jupiter'
+        testImplementation('org.springframework.boot:spring-boot-starter-test') {
             exclude group: 'junit', module: 'junit'
         }
     }

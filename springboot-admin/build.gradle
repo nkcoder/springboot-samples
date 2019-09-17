@@ -1,4 +1,4 @@
 dependencies {
-    implementation("org.springframework.boot:spring-boot-starter-security:$springBootVersion")
-    implementation("de.codecentric:spring-boot-admin-starter-server:$springAdminVersion")
+    implementation 'org.springframework.boot:spring-boot-starter-security'
+    implementation 'de.codecentric:spring-boot-admin-starter-server:2.1.6'
 }

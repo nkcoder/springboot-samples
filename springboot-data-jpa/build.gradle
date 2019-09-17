@@ -1,15 +1,15 @@
 bootJar {
-    archivesBaseName="spring-data-jpa"
-    version='1.0'
+    archivesBaseName = 'spring-data-jpa'
+    version = '1.0'
 }
 
 dependencies {
-    implementation("org.springframework.boot:spring-boot-starter-web:$springBootVersion")
+    implementation 'org.springframework.boot:spring-boot-starter-web'
 
-    implementation("org.springframework.boot:spring-boot-starter-data-jpa:$springBootVersion")
-    implementation("org.flywaydb:flyway-core:${flyway}")
-    implementation("org.springframework.boot:spring-boot-starter-data-rest:$springBootVersion")
-    implementation("mysql:mysql-connector-java:${mysqlVersion}")
+    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+    implementation 'org.flywaydb:flyway-core'
+    implementation 'org.springframework.boot:spring-boot-starter-data-rest'
+    implementation 'mysql:mysql-connector-java'
 
-    runtime("com.h2database:h2:$h2Version")
+    runtime 'com.h2database:h2'
 }

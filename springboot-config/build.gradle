@@ -1,8 +1,8 @@
 dependencies {
-    implementation("org.springframework.boot:spring-boot-starter-web:$springBootVersion")
+    implementation 'org.springframework.boot:spring-boot-starter-web'
 
-    annotationProcessor("org.springframework.boot:spring-boot-configuration-processor:$springBootVersion")
-    implementation("mysql:mysql-connector-java:$mysqlVersion")
+    annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
+    implementation 'mysql:mysql-connector-java'
 }
 
 compileJava.dependsOn(processResources)

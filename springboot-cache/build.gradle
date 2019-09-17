@@ -1,7 +1,8 @@
 dependencies {
-    implementation("org.springframework.boot:spring-boot-starter-web:$springBootVersion")
+    implementation 'org.springframework.boot:spring-boot-starter-web'
 
-    implementation("org.springframework.boot:spring-boot-starter-cache:$springBootVersion")
-    implementation("com.github.ben-manes.caffeine:caffeine:2.7.0")
-    annotationProcessor("org.springframework.boot:spring-boot-configuration-processor:$springBootVersion")
+    implementation 'org.springframework.boot:spring-boot-starter-cache'
+    implementation 'com.github.ben-manes.caffeine:caffeine'
+
+    annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
 }

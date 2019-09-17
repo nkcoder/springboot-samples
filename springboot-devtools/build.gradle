@@ -6,11 +6,11 @@ configurations {
 }
 
 bootJar {
-    archivesBaseName="spring-devtools"
-    version="1.0"
+    archivesBaseName = 'springboot-devtools'
+    version = '1.0'
 }
 
 dependencies {
-    implementation("org.springframework.boot:spring-boot-starter-web:$springBootVersion")
-    implementation("org.springframework.boot:spring-boot-starter-thymeleaf:$springBootVersion")
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
 }
