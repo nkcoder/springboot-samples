@@ -16,7 +16,7 @@ import lombok.RequiredArgsConstructor;
 @Table(name = "player")
 @NoArgsConstructor(access = AccessLevel.PRIVATE, force = true)
 @RequiredArgsConstructor
-public class Player {
+public class PlayerEntity {
 
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -24,7 +24,7 @@ public class Player {
 
   private final String name;
 
-  private final Integer teamId;
+  private final String team;
 
   private final LocalDate joinAt;
 

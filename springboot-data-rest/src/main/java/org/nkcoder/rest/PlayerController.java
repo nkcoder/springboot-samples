@@ -1,7 +1,7 @@
 package org.nkcoder.rest;
 
-import static org.springframework.hateoas.mvc.ControllerLinkBuilder.linkTo;
-import static org.springframework.hateoas.mvc.ControllerLinkBuilder.methodOn;
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -9,8 +9,8 @@ import java.util.stream.StreamSupport;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.domain.Sort.Order;
 import org.springframework.data.rest.webmvc.RepositoryRestController;
-import org.springframework.hateoas.Resource;
-import org.springframework.hateoas.Resources;
+import org.springframework.hateoas.CollectionModel;
+import org.springframework.hateoas.EntityModel;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -26,14 +26,14 @@ public class PlayerController {
   }
 
   @GetMapping("/players/by-team")
-  public Resources<Resource<Player>> getByTeamAndJoinAtDesc(
+  public CollectionModel<EntityModel<Player>> getByTeamAndJoinAtDesc(
       @RequestParam("teamId") Integer teamId) {
     Iterable<Player> playersIterable = playerRepository.findAll(Sort.by(Order.desc("joinAt")));
     List<Player> players = StreamSupport.stream(playersIterable.spliterator(), false)
         .filter(p -> p.getTeamId().equals(teamId))
         .collect(Collectors.toList());
 
-    Resources<Resource<Player>> playerResources = Resources.wrap(players);
+    CollectionModel<EntityModel<Player>> playerResources = CollectionModel.wrap(players);
     playerResources.add(
         linkTo(methodOn(PlayerController.class).getByTeamAndJoinAtDesc(teamId)).withRel("by-team"));
     return playerResources;

@@ -5,10 +5,12 @@ import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
-import org.nkcoder.jpa.entity.Player;
+import org.nkcoder.jpa.entity.PlayerEntity;
 import org.springframework.data.jpa.domain.Specification;
 
-public class PlayerSpecification implements Specification<Player> {
+public class PlayerSpecification implements Specification<PlayerEntity> {
+
+  private static final long serialVersionUID = -3500377236067456614L;
 
   private final SearchCriteria searchCriteria;
 
@@ -17,7 +19,7 @@ public class PlayerSpecification implements Specification<Player> {
   }
 
   @Override
-  public Predicate toPredicate(Root<Player> root, CriteriaQuery<?> query,
+  public Predicate toPredicate(Root<PlayerEntity> root, CriteriaQuery<?> query,
       CriteriaBuilder criteriaBuilder) {
     String key = searchCriteria.getKey();
     Operation operation = searchCriteria.getOperation();
