@@ -20,7 +20,7 @@ public class HelloControllerTest {
   private MockMvc mockMvc;
 
   @Test
-  public void shouldReturnMessage_whenHello() throws Exception {
+  public void shouldSayHello() throws Exception {
     mockMvc.perform(get("/hello"))
         .andExpect(status().isOk())
         .andExpect(model().attribute("message", is("world")));

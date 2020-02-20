@@ -8,13 +8,13 @@ buildscript {
     }
     dependencies {
         classpath 'gradle.plugin.com.github.spotbugs:spotbugs-gradle-plugin:1.7.1'
-        classpath 'org.springframework.boot:spring-boot-gradle-plugin:2.1.8.RELEASE'
+        classpath 'org.springframework.boot:spring-boot-gradle-plugin:2.2.4.RELEASE'
         classpath 'io.spring.gradle:dependency-management-plugin:1.0.8.RELEASE'
     }
 }
 
 wrapper {
-    gradleVersion = '5.6'
+    gradleVersion = '6.0.1'
 }
 
 subprojects {
@@ -26,8 +26,8 @@ subprojects {
     group 'org.nkcoder'
     version '1.0'
 
-    targetCompatibility = 1.11
-    sourceCompatibility = 1.11
+    targetCompatibility = JavaVersion.VERSION_11
+    sourceCompatibility = JavaVersion.VERSION_11
 
     repositories {
         mavenCentral()
@@ -59,17 +59,14 @@ subprojects {
 
     dependencies {
         compileOnly 'org.projectlombok:lombok'
-
         annotationProcessor 'org.projectlombok:lombok'
 
         implementation "com.google.guava:guava:$guavaVersion"
 
         developmentOnly 'org.springframework.boot:spring-boot-devtools'
 
-        testImplementation "org.junit.jupiter:junit-jupiter:${jupiterVersion}"
-        testImplementation 'org.mockito:mockito-junit-jupiter'
         testImplementation('org.springframework.boot:spring-boot-starter-test') {
-            exclude group: 'junit', module: 'junit'
+            exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
         }
     }
 
