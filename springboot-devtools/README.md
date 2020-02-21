@@ -1,1 +1,1 @@
-please see the blog: http://tech.freeimmi.com/2020/02/springboot-1-use-devtools/
+please see the blog: [SpringBoot: dev-tools](http://tech.freeimmi.com/2020/02/springboot-1-use-devtools/)
