@@ -12,3 +12,5 @@ include 'springboot-kafka'
 include 'springboot-reactive-mongodb'
 include 'springboot-actuator'
 include 'springboot-admin'
+include 'springboot-mybatis-annotation'
+

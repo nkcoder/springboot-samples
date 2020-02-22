@@ -17,11 +17,11 @@ public class JacksonConfig {
     return new ParameterNamesModule(Mode.PROPERTIES);
   }
 
-  @Bean
-  public ObjectMapper objectMapper() {
-    ObjectMapper objectMapper = new ObjectMapper();
-    objectMapper.registerModule(new ParameterNamesModule(Mode.PROPERTIES));
-    return objectMapper;
-  }
+//  @Bean
+//  public ObjectMapper objectMapper() {
+//    ObjectMapper objectMapper = new ObjectMapper();
+//    objectMapper.registerModule(new ParameterNamesModule(Mode.PROPERTIES));
+//    return objectMapper;
+//  }
 
 }
