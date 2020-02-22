@@ -1,0 +1,8 @@
+dependencies {
+    implementation("org.mybatis.spring.boot:mybatis-spring-boot-starter:2.1.1")
+
+    testImplementation('org.mybatis.spring.boot:mybatis-spring-boot-starter-test:2.1.1') {
+        exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
+    }
+    runtime 'com.h2database:h2'
+}

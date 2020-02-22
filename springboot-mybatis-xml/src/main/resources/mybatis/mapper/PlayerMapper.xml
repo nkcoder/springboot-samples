@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.nkcoder.mybatis.xml.mapper.PlayerMapper">
+
+  <sql id="columns">id, name, team, join_at</sql>
+
+  <insert id="insert" useGeneratedKeys="true" keyProperty="id" parameterType="Player">
+    insert into player (`name`, `team`, `join_at`)
+    values (#{name}, #{team}, #{joinAt})
+  </insert>
+
+  <delete id="delete">
+    delete
+    from player
+    where id = #{id}
+  </delete>
+
+  <select id="findById" resultType="Player">
+    select
+    <include refid="columns"/>
+    from player
+    where id = #{id}
+  </select>
+
+  <update id="update" parameterType="Player">
+    update player
+    <set>
+      <if test="name != null and name != ''">
+        name = #{name},
+      </if>
+      <if test="team != null and team != ''">
+        team = #{team},
+      </if>
+      <if test="joinAt != null">
+        join_at = #{joinAt}
+      </if>
+    </set>
+    where id = #{id}
+  </update>
+
+</mapper>

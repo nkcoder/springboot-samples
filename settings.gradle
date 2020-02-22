@@ -13,4 +13,5 @@ include 'springboot-reactive-mongodb'
 include 'springboot-actuator'
 include 'springboot-admin'
 include 'springboot-mybatis-annotation'
+include 'springboot-mybatis-xml'
 
