@@ -1,25 +1,29 @@
 package org.nkcoder.validation.controller;
 
-import java.util.UUID;
 import javax.validation.Valid;
-import lombok.extern.slf4j.Slf4j;
+import org.nkcoder.validation.EmployeeService;
 import org.nkcoder.validation.model.Employee;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/employee")
-@Slf4j
+@RequestMapping("/employees")
 public class EmployeeController {
 
-  @PostMapping("")
-  public String addEmploy(@RequestBody  @Valid Employee employee) {
-    log.info("employee to create: {}", employee);
+  private final EmployeeService employeeService;
 
-    String employeeId = UUID.randomUUID().toString();
-    return employeeId;
+  public EmployeeController(EmployeeService employeeService) {
+    this.employeeService = employeeService;
+  }
+
+  @PostMapping("")
+  @ResponseStatus(HttpStatus.CREATED)
+  public String create(@RequestBody @Valid Employee employee) {
+    return employeeService.createEmployee(employee);
   }
 
 }

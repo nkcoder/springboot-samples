@@ -7,12 +7,12 @@ import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 import lombok.Getter;
-import lombok.ToString;
+import lombok.RequiredArgsConstructor;
 import org.hibernate.validator.constraints.CreditCardNumber;
 import org.nkcoder.validation.validator.UTF8Size;
 
 @Getter
-@ToString
+@RequiredArgsConstructor
 public class Employee implements Serializable {
 
   private static final long serialVersionUID = -8224860450904540019L;
@@ -33,18 +33,4 @@ public class Employee implements Serializable {
 
   @Digits(integer = 3, fraction = 0, message = "invalid CVV")
   private final String ccCVV;
-
-  public Employee(
-      String name,
-      String city,
-      String ccNumber,
-      String ccExpiration,
-      String ccCVV) {
-    this.name = name;
-    this.city = city;
-    this.ccNumber = ccNumber;
-    this.ccExpiration = ccExpiration;
-    this.ccCVV = ccCVV;
-  }
-
 }
