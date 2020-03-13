@@ -1,0 +1,29 @@
+spring:
+  application:
+    name: springboot_scala
+
+  jpa:
+    hibernate:
+      ddl-auto: none
+    database-platform: org.hibernate.dialect.MySQL57Dialect
+    show-sql: true
+
+  flyway:
+    user: root
+    password: root@2020
+    url: jdbc:mysql://localhost:3306
+    encoding: UTF-8
+    schemas: test
+
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/test
+    username: root
+    password: root@2020
+
+
+server:
+  port: 8080
+  servlet:
+    context-path: /api
+
