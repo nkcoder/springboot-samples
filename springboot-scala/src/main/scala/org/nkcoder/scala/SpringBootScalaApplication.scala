@@ -26,6 +26,7 @@ class SpringBootScalaApplication {
 
 }
 
-object SpringBootScalaApplication extends App {
-  SpringApplication.run(classOf[SpringBootScalaApplication], args: _*)
+object SpringBootScalaApplication {
+  def main(args: Array[String]): Unit =
+    SpringApplication.run(classOf[SpringBootScalaApplication], args: _*)
 }
