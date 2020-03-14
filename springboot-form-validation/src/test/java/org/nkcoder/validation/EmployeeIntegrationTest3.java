@@ -18,44 +18,38 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 @SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
 public class EmployeeIntegrationTest3 {
 
-  @LocalServerPort
-  private int port;
+  @LocalServerPort private int port;
 
   @BeforeEach
-  public void setup() {
+  void setup() {
     RestAssured.port = port;
   }
 
   @Test
-  public void shouldCreateEmployee() {
+  void shouldCreateEmployee() {
 
-    Employee employee = new Employee(
-        "dity",
-        "LA",
-        "4716489518654704",
-        "05/20",
-        "023"
-    );
+    Employee employee = new Employee("dity", "LA", "4716489518654704", "05/20", "023");
 
-    given().contentType("application/json").body(employee).
-        when().post("/api/employees").then().statusCode(HttpStatus.CREATED.value());
+    given()
+        .contentType("application/json")
+        .body(employee)
+        .when()
+        .post("/api/employees")
+        .then()
+        .statusCode(HttpStatus.CREATED.value());
   }
 
   @Test
-  public void shouldReturnBadRequestWhenParamInvalid() {
-    Employee employee = new Employee(
-        "dity",
-        "LA",
-        "4716489518654704",
-        "05",
-        "023"
-    );
+  void shouldReturnBadRequestWhenParamInvalid() {
+    Employee employee = new Employee("dity", "LA", "4716489518654704", "05", "023");
 
-    given().contentType("application/json").body(employee)
-        .when().post("/api/employees").then().statusCode(HttpStatus.BAD_REQUEST.value())
+    given()
+        .contentType("application/json")
+        .body(employee)
+        .when()
+        .post("/api/employees")
+        .then()
+        .statusCode(HttpStatus.BAD_REQUEST.value())
         .body("message", equalTo("required format MM/YY"));
-
-
   }
-
 }

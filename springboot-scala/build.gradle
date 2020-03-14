@@ -11,5 +11,17 @@ dependencies {
     implementation 'com.typesafe.scala-logging:scala-logging_2.13:3.9.2'
     implementation 'com.fasterxml.jackson.module:jackson-module-scala_2.13:2.10.2'
 
-    testImplementation 'org.springframework.security:spring-security-test'
+    testImplementation 'org.scalatest:scalatest_2.13:3.1.0'
+
+    // todo
+    testImplementation 'io.rest-assured:rest-assured:4.3.0'
+    testImplementation 'io.rest-assured:rest-assured-common:4.3.0'
+    testImplementation 'io.rest-assured:json-path:4.3.0'
+    testImplementation 'io.rest-assured:xml-path:4.3.0'
+    testImplementation 'io.rest-assured:spring-mock-mvc:4.3.0'
+    testImplementation 'io.rest-assured:scala-support:4.3.0'
+
+    testImplementation('org.springframework.boot:spring-boot-starter-test') {
+        exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
+    }
 }

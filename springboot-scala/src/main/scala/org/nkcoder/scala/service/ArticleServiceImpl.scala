@@ -67,5 +67,7 @@ class ArticleServiceImpl @Autowired()(articleRepository: ArticleRepository)
 
   }
 
-  override def deleteById(id: Long): Unit = articleRepository.deleteById(id)
+  override def deleteById(id: Long): Unit = {
+    articleRepository.deleteById(id)
+  }
 }
