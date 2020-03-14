@@ -2,6 +2,7 @@ package org.nkcoder.validation.exception;
 
 import java.util.stream.Collectors;
 import lombok.extern.slf4j.Slf4j;
+import org.nkcoder.validation.controller.EmployeeController;
 import org.springframework.http.HttpStatus;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
@@ -12,7 +13,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
 @Slf4j
-@ControllerAdvice
+@ControllerAdvice(assignableTypes = EmployeeController.class)
 public class GlobalExceptionHandler {
 
   @ExceptionHandler(MethodArgumentNotValidException.class)

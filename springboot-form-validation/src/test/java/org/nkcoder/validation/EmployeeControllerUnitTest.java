@@ -1,8 +1,8 @@
 package org.nkcoder.validation;
 
 import static io.restassured.module.mockmvc.RestAssuredMockMvc.given;
+import static org.hamcrest.Matchers.containsString;
 import static org.hamcrest.Matchers.equalTo;
-import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 import io.restassured.http.ContentType;
@@ -30,7 +30,7 @@ public class EmployeeControllerUnitTest {
 
   @BeforeEach
   void setup() {
-    RestAssuredMockMvc.standaloneSetup(employeeController);
+    RestAssuredMockMvc.standaloneSetup(employeeController, globalExceptionHandler);
   }
 
   @Test
@@ -48,5 +48,21 @@ public class EmployeeControllerUnitTest {
         .status(HttpStatus.CREATED)
         .contentType(ContentType.JSON)
         .body("id", equalTo(id.getId()));
+  }
+
+  @Test
+  public void shouldReturnErrorMessageWhenCreditCardInvalid() {
+
+    Employee employee = new Employee("dity", "LA", "not-a-number", "05/20", "023");
+
+    given()
+        .contentType(ContentType.JSON)
+        .body(employee)
+        .when()
+        .post("/employees")
+        .then()
+        .status(HttpStatus.BAD_REQUEST)
+        .contentType(ContentType.JSON)
+        .body("message", containsString("invalid credit card number"));
   }
 }
