@@ -19,49 +19,34 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 @ExtendWith(SpringExtension.class)
 @SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
-public class EmployeeIntegrationTest {
+public class IntegrationTestByRestTemplate {
 
-  @Autowired
-  private TestRestTemplate testRestTemplate;
+  @Autowired private TestRestTemplate testRestTemplate;
 
   @Test
   public void shouldCreateEmployee() {
 
-    Employee employee = new Employee(
-        "dity",
-        "LA",
-        "4716489518654704",
-        "05/20",
-        "023"
-    );
+    Employee employee = new Employee("dity", "LA", "4716489518654704", "05/20", "023");
 
     HttpHeaders httpHeaders = new HttpHeaders();
     httpHeaders.put(HttpHeaders.CONTENT_TYPE, List.of(MediaType.APPLICATION_JSON_VALUE));
-    HttpEntity httpEntity = new HttpEntity(employee, httpHeaders);
+    HttpEntity<Employee> httpEntity = new HttpEntity<>(employee, httpHeaders);
 
-    ResponseEntity<String> responseEntity = testRestTemplate
-        .postForEntity("/employees", httpEntity, String.class);
+    ResponseEntity<String> responseEntity =
+        testRestTemplate.postForEntity("/employees", httpEntity, String.class);
     assertThat(responseEntity.getStatusCode()).isEqualTo(HttpStatus.CREATED);
   }
 
   @Test
   public void shouldReturnBadRequestWhenParamInvalid() {
-    Employee employee = new Employee(
-        "dity",
-        "LA",
-        "4716489518654704",
-        "05",
-        "023"
-    );
+    Employee employee = new Employee("dity", "LA", "4716489518654704", "05", "023");
 
     HttpHeaders httpHeaders = new HttpHeaders();
     httpHeaders.put(HttpHeaders.CONTENT_TYPE, List.of(MediaType.APPLICATION_JSON_VALUE));
     HttpEntity httpEntity = new HttpEntity(employee, httpHeaders);
 
-    ResponseEntity<String> responseEntity = testRestTemplate
-        .postForEntity("/employees", httpEntity, String.class);
+    ResponseEntity<String> responseEntity =
+        testRestTemplate.postForEntity("/employees", httpEntity, String.class);
     assertThat(responseEntity.getStatusCode()).isEqualTo(HttpStatus.BAD_REQUEST);
-
   }
-
 }

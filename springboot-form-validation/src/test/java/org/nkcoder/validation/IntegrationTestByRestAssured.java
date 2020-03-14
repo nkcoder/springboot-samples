@@ -16,7 +16,7 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 @ExtendWith(SpringExtension.class)
 @SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
-public class EmployeeIntegrationTest3 {
+public class IntegrationTestByRestAssured {
 
   @LocalServerPort private int port;
 

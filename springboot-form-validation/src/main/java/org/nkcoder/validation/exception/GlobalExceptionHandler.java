@@ -18,7 +18,7 @@ public class GlobalExceptionHandler {
   @ExceptionHandler(MethodArgumentNotValidException.class)
   @ResponseBody
   @ResponseStatus(HttpStatus.BAD_REQUEST)
-  public ResponseContent handleMethodArgumentNotValidException(
+  public ApiError handleMethodArgumentNotValidException(
       MethodArgumentNotValidException exception) {
     log.error("method argument not valid: {}", exception.getMessage());
     String errorMessage = "field error";
@@ -30,7 +30,7 @@ public class GlobalExceptionHandler {
           .collect(Collectors.joining(" | "));
     }
 
-    return ResponseContent.builder()
+    return ApiError.builder()
         .code("INVALID_ARGUMENT")
         .message(errorMessage)
         .build();

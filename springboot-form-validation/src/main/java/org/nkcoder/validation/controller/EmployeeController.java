@@ -3,6 +3,7 @@ package org.nkcoder.validation.controller;
 import javax.validation.Valid;
 import org.nkcoder.validation.EmployeeService;
 import org.nkcoder.validation.model.Employee;
+import org.nkcoder.validation.model.EmployeeId;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -22,8 +23,7 @@ public class EmployeeController {
 
   @PostMapping("")
   @ResponseStatus(HttpStatus.CREATED)
-  public String create(@RequestBody @Valid Employee employee) {
+  public EmployeeId create(@RequestBody @Valid Employee employee) {
     return employeeService.createEmployee(employee);
   }
-
 }

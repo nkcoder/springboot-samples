@@ -6,7 +6,7 @@ import lombok.Getter;
 
 @Getter
 @Builder
-public class ResponseContent implements Serializable {
+public class ApiError implements Serializable {
 
   private static final long serialVersionUID = -2369285516295767134L;
 

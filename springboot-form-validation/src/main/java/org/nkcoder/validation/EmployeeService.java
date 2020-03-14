@@ -3,17 +3,17 @@ package org.nkcoder.validation;
 import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
 import org.nkcoder.validation.model.Employee;
+import org.nkcoder.validation.model.EmployeeId;
 import org.springframework.stereotype.Service;
 
 @Service
 public class EmployeeService {
 
-  private final ConcurrentHashMap<String, Employee> employees = new ConcurrentHashMap<>();
+  private static final ConcurrentHashMap<String, Employee> EMPLOYEES = new ConcurrentHashMap<>();
 
-  public String createEmployee(Employee employee) {
+  public EmployeeId createEmployee(Employee employee) {
     String id = UUID.randomUUID().toString();
-    employees.putIfAbsent(id, employee);
-    return id;
+    EMPLOYEES.putIfAbsent(id, employee);
+    return new EmployeeId(id);
   }
-
 }
