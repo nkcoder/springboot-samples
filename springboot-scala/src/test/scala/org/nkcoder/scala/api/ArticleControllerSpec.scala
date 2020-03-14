@@ -1,41 +1,36 @@
 package org.nkcoder.scala.api
 import java.time.LocalDateTime
 
+import io.restassured.module.mockmvc.RestAssuredMockMvc
 import io.restassured.module.mockmvc.RestAssuredMockMvc._
 import io.restassured.module.scala.RestAssuredSupport.AddThenToResponse
-import org.hamcrest.Matchers._
+import org.mockito.ArgumentMatchers
 import org.mockito.Mockito.{when => mockWhen, _}
 import org.nkcoder.scala.UnitSpec
 import org.nkcoder.scala.service.ArticleService
-import org.scalatest.Ignore
 import org.springframework.http.HttpStatus
 
-/**
-* todo
-  */
-@Ignore
 class ArticleControllerSpec extends UnitSpec {
 
   val articleService = mock(classOf[ArticleService])
+  RestAssuredMockMvc.standaloneSetup(new ArticleController(articleService))
 
   "ArticleController" should "create article" in {
     val createArticleRequest =
       new CreateOrUpdateArticleRequest("sub", "con", 1L)
     val id = 1L
-    val jsonAsMap =
-      Map("subject" -> "sub", "content" -> "con", "createdBy" -> 1L)
 
-    mockWhen(articleService.create(createArticleRequest)).thenReturn(id)
+    mockWhen(
+      articleService
+        .create(ArgumentMatchers.any(classOf[CreateOrUpdateArticleRequest]))
+    ).thenReturn(id)
 
     given()
-      .standaloneSetup(new ArticleController(articleService))
-//      .contentType("application/json")
       .contentType("application/json")
-      .body(jsonAsMap)
-//      .body(createArticleRequest)
+      .body(createArticleRequest)
       .post("/articles")
       .Then()
-      .body("$", equalTo(id))
+      .status(HttpStatus.CREATED)
   }
 
   it should "get article by id" in {

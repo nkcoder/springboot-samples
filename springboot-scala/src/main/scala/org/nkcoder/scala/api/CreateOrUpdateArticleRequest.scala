@@ -5,4 +5,6 @@ import java.lang.Long
 class CreateOrUpdateArticleRequest(val subject: String,
                                    val content: String,
                                    val createdBy: Long)
-    extends Serializable
+    extends Serializable {
+  def this() = this(null, null, null)
+}
