@@ -1,0 +1,1 @@
+please refer to the blog: [SpringBoot-Scala](http://tech.freeimmi.com/2020/03/springboot-tutorial5-scala/)
