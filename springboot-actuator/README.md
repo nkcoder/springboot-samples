@@ -1,8 +1,14 @@
-Actuator 可以用于监控 SpringBoot 应用，并查看应用内部的状态，可以通过 HTTP 或 JMX 方式。
+please refer to the blog: [use springboot-actuator to monitor the application](http://freeimmi.com/2020/03/springboot-tutorial6-actuator/)
+
+SpringBoot Actuator 可以用于监控 SpringBoot 应用，并查看应用内部的状态，可以通过 HTTP 或 JMX 方式。
 
 ## 默认的 Endpoint
 
-默认的 path 前缀为`actuator`，可以通过`management.endpoints.web.base-path`属性配置。
+默认的 path 前缀为`actuator`，可以通过属性配置：
+
+```yml
+management.endpoints.web.base-path: /admin
+```
 
 通过`/actuator`可以查看所有的 endpoints:
 
@@ -10,10 +16,22 @@ Actuator 可以用于监控 SpringBoot 应用，并查看应用内部的状态�
 $ http :8080/actuator
 ```
 
-大部分的 endpoint 默认是禁用的，可以通过属性`management.endpoints.web.exposure.include`和`management.endpoints.web.exposure.exclude`进行配置。
-可以使用通配符`’*‘`表示所有：
+主要的endpoint有：
 
-```text
+- /beans :  Spring Context中的所有bean
+- /env ： 所有属性信息
+- /health ：系统的健康信息
+- /httptrace ：http请求的trace信息
+- /info ：系统info
+- /loggers ：日志信息
+- /metrics ：系统的度量，包括内存、cpu、http请求等
+- /mappings ：所有@RequestMapping映射信息
+- /threaddump ：线程dump信息
+- /heapdump ：生成一个hprof文件
+
+大部分的 endpoint的http访问是禁用的，可以通过属性`management.endpoints.web.exposure.include`和`management.endpoints.web.exposure.exclude`进行配置，支持通配符`‘*’`表示所有：
+
+```yml
 management:
   endpoints:
     web:
@@ -25,11 +43,18 @@ management:
 
 ### /info
 
-为`/info`提供数据有多种方式，第一种是静态的，在配置文件中定义以`info`为前缀的属性。
+为`/info`提供数据有多种方式，第一种是静态的，在配置文件中定义以`info`为前缀的属性，如：
 
-另一种是动态的，即实现`InfoContributor`接口，实现`contribute()`方法即可，代码参考`InfoContributor.java`。
+```yml
+info:
+  contact:
+    email: myeamil@example.com
+    phone: +86-17100000000
+```
 
-另外，Actuator 提供了一些预先定义的`InfoContributor`实现，比如`BuildInfoContributor`可以返回项目的 build 信息，如果要启用，需要在 maven/gradle 中添加 build-info 任务，以 gradle 为例：
+另一种是动态的，即实现`InfoContributor`接口，实现`contribute()`方法即可，代码参考`MyInfoContributor.java`。
+
+另外，Actuator 提供了一些预先定义的`InfoContributor`实现，比如`BuildInfoContributor`可以返回项目的 build 信息，如果要启用，需要在gradle 中添加配置：
 
 ```gradle
 springBoot {
@@ -91,9 +116,9 @@ $ http post :8080/actuator/loggers/org.nkcoder.admin configuredLevel=DEBUG
 
 `/conditions`：查看`AutoConfiguration`下 bean 的加载信息，比如`@ConditionOnMissingBean`， `@ConditionOnClass`等。
 
-`/mappings`：查看 Spring MVC 中 REST 的映射信息。
+`/mappings`：所有@RequestMapping的URL映射。
 
-`/httptrace`: 查看系统最近 100 个请求的处理情况，包括何时处理的、耗时、header 信息等。
+`/httptrace`: 可以查看系统的请求信息，需要`HttpTraceRepository`的实现bean，默认禁用，因为默认的实现是`InMemoryHttpTraceRepository`，会比较占用内存，如果要启用，可以定义一个`InMemoryHttpTraceRepository`的bean，或者自定义`HttpTraceRepository`的实现。
 
 `/threaddump`：返回当前所有线程活动的快照信息。
 
@@ -112,14 +137,19 @@ $ http post :8080/actuator/loggers/org.nkcoder.admin configuredLevel=DEBUG
 
 Actuator 并不关心安全问题，所以安全问题可以交给 Spring Security 来控制。
 
-Actuator 的请求路径在`/actuator`下（可配置），所以完全可以当作一般的 REST 节点来配置安全。
+Actuator 的请求路径为`/actuator`（可配置），所以完全可以当作一般的 REST 节点来配置安全。
 
-为了可以不用依赖固定的`/actuator`前缀，Actuator 还提供了`EndpointRequest`配置，如：
+为了可以不用依赖于可配置的`/actuator`字符串，Actuator 还提供了`EndpointRequest`配置，如：
 
 ```java
 http.requestMatcher(EndpointRequest.toAnyEndpoint().excluding("health", "info"))
   .authorizeRequests().anyRequest().hasRole("ADMIN")
   .and().httpBasic();
+
+http.requestMatcher(EndpointRequest.to("beans", "threaddump", "heapdump"))
+    .authorizeRequests().anyRequest().hasRole("ADMIN")
+    .and()
+    .httpBasic();
 ```
 
 ## JMX
@@ -137,20 +167,13 @@ management:
         exclude: threaddump,heapdump
 ```
 
+可以通过任意JMX客户端，如JConsole查看。
+
 也可以自定义 MBean，只需要将对应的 bean 使用`@ManagedResource`，并将需要暴露的属性用`@ManagedAttribute`，需要暴露的方法使用`@ManagedOperation`注解即可。
 
-MBean 状态的变化，需要 JMX 客户端通过 PULL 的方式主动拉取，Spring 也支持通过`NotificationPublisher`主动将变化 PUSH 给 JMX 客户端，只需要实现`NotificationPublisherAware`接口，并发送 Notification。JMX 客户端需要 Subscribe。
+MBean 状态的变化，需要 JMX 客户端通过 PULL 的方式主动拉取，Spring 也支持通过`NotificationPublisher`主动将变化 PUSH 给 JMX 客户端，只需要MBean实现`NotificationPublisherAware`接口，并发送 Notification。JMX 客户端需要 Subscribe。
 
 ```java
-import java.util.concurrent.atomic.AtomicInteger;
-import javax.management.Notification;
-import org.springframework.jmx.export.annotation.ManagedAttribute;
-import org.springframework.jmx.export.annotation.ManagedOperation;
-import org.springframework.jmx.export.annotation.ManagedResource;
-import org.springframework.jmx.export.notification.NotificationPublisher;
-import org.springframework.jmx.export.notification.NotificationPublisherAware;
-import org.springframework.stereotype.Component;
-
 @Component
 @ManagedResource
 public class MyCounterMbean implements NotificationPublisherAware {
@@ -189,3 +212,8 @@ public class MyCounterMbean implements NotificationPublisherAware {
 
 }
 ```
+
+### 参考
+
+- [Spring in Action, Fifth Edition](https://www.manning.com/books/spring-in-action-fifth-edition)
+- [Spring Boot Actuator: Production-ready Features](https://docs.spring.io/spring-boot/docs/current/reference/html/production-ready-features.html#production-ready)

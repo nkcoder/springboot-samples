@@ -8,7 +8,7 @@ import org.springframework.security.config.annotation.authentication.builders.Au
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import org.springframework.security.crypto.password.NoOpPasswordEncoder;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 @Configuration
@@ -18,7 +18,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
   private String username;
   private String password;
 
-  public SecurityConfig(@Value("${spring.security.user.name}") String username,
+  public SecurityConfig(
+      @Value("${spring.security.user.name}") String username,
       @Value("${spring.security.user.password}") String password) {
     this.username = username;
     this.password = password;
@@ -35,24 +36,24 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     // only /beans, /threaddump, /heapdump need to authorize
     http.requestMatcher(EndpointRequest.to("beans", "threaddump", "heapdump"))
-        .authorizeRequests().anyRequest().hasRole("ADMIN")
+        .authorizeRequests()
+        .anyRequest()
+        .hasRole("ADMIN")
         .and()
         .httpBasic();
   }
 
   @Override
   protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-    auth
-        .inMemoryAuthentication()
+    auth.inMemoryAuthentication()
         .withUser(username)
-        .password(password)
+        .password(passwordEncoder().encode(password))
         .roles("ADMIN")
         .authorities("ROLE_ADMIN");
   }
 
   @Bean
   public PasswordEncoder passwordEncoder() {
-    return NoOpPasswordEncoder.getInstance();
+    return new BCryptPasswordEncoder();
   }
-
 }
