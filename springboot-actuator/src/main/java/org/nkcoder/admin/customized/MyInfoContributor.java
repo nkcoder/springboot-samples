@@ -1,4 +1,4 @@
-package org.nkcoder.admin.custom;
+package org.nkcoder.admin.customized;
 
 import java.util.Map;
 import org.nkcoder.admin.HelloRepository;

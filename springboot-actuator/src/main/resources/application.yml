@@ -8,14 +8,14 @@ spring:
     name: spring-actuator-demo
 
   # for spring admin
-  boot:
-    admin:
-      client:
-        url: http://localhost:9090
-        instance:
-          metadata:
-            user.name: ${spring.security.user.name}
-            user.password: ${spring.security.user.password}
+#  boot:
+#    admin:
+#      client:
+#        url: http://localhost:9090
+#        instance:
+#          metadata:
+#            user.name: ${spring.security.user.name}
+#            user.password: ${spring.security.user.password}
 
 management:
   endpoints:
@@ -23,11 +23,11 @@ management:
       base-path: /actuator
       exposure:
         include: '*'
-        exclude: heapdump,threaddump
+        exclude: heapdump
     jmx:
       exposure:
         include: '*'
-        exclude: threaddump,heapdump
+        exclude: heapdump
 
   endpoint:
     health:

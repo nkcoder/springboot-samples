@@ -1,4 +1,4 @@
-package org.nkcoder.admin.custom;
+package org.nkcoder.admin.customized;
 
 import java.util.concurrent.atomic.AtomicInteger;
 import javax.management.Notification;

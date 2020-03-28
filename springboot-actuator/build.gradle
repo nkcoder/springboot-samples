@@ -6,15 +6,11 @@ springBoot {
     buildInfo()
 }
 
-ext {
-    springBootAdminVersion = '2.1.6'
-}
-
 dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-web'
     implementation 'org.springframework.boot:spring-boot-starter-actuator'
     implementation 'org.springframework.boot:spring-boot-starter-security'
-    implementation "de.codecentric:spring-boot-admin-starter-client:$springBootAdminVersion"
+//    implementation "de.codecentric:spring-boot-admin-starter-client:$springBootAdminVersion"
 
     testImplementation('org.springframework.boot:spring-boot-starter-test') {
         exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
