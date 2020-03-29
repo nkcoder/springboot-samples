@@ -1,6 +1,9 @@
 dependencies {
+    implementation 'org.springframework.boot:spring-boot-starter-web'
     implementation 'org.springframework.boot:spring-boot-starter-security'
-    implementation 'de.codecentric:spring-boot-admin-starter-server:2.1.6'
+    implementation 'de.codecentric:spring-boot-admin-starter-server:2.2.2'
+    implementation 'de.codecentric:spring-boot-admin-server-ui:2.2.2'
+    implementation "de.codecentric:spring-boot-admin-starter-client:2.2.2"
 
     testImplementation('org.springframework.boot:spring-boot-starter-test') {
         exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'

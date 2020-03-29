@@ -59,8 +59,6 @@ subprojects {
         compileOnly 'org.projectlombok:lombok'
         annotationProcessor 'org.projectlombok:lombok'
 
-//        implementation "com.google.guava:guava:$guavaVersion"
-
         developmentOnly 'org.springframework.boot:spring-boot-devtools'
 
     }

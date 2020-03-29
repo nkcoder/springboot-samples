@@ -8,14 +8,15 @@ spring:
     name: spring-actuator-demo
 
   # for spring admin
-#  boot:
-#    admin:
-#      client:
-#        url: http://localhost:9090
-#        instance:
-#          metadata:
-#            user.name: ${spring.security.user.name}
-#            user.password: ${spring.security.user.password}
+  boot:
+    admin:
+      client:
+        url: http://localhost:9090
+        instance:
+          metadata:
+            user.name: ${spring.security.user.name}
+            user.password: ${spring.security.user.password}
+
 
 management:
   endpoints:
@@ -36,6 +37,11 @@ management:
   info:
     git:
       mode: full
+
+
+  server:
+    address: 127.0.0.1
+    port: 8080
 
 # for endpoint: /actuator/info
 info:

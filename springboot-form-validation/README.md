@@ -1,10 +1,13 @@
-在提交表单时，不仅前端需要对字段进行校验和提示，后端也需要做同样的工作。Spring 支持 Java 的 Bean Validation API（即 JSR-303），而且 Spring Boot 默认提供了 Validation API 及 对应的 Hibernate 实现，只需要在 bean 的需要校验的字段上添加对应的校验注解即可。如下示例：
+please refer to the blog: [springboot-form-validation](http://tech.freeimmi.com/2020/02/springboot-4-form-validation/)
+
+-----
+
+在提交表单时，不仅前端需要对字段进行校验和提示，后端也需要做同样的工作。Spring 支持 Java 的 Bean Validation API（即 JSR-303），而且 Spring Boot 默认提供了 Validation API 及对应的 Hibernate 实现，只需要在 bean 的需要校验的字段上添加对应的校验注解即可。如下示例：
 
 ```java
 @Getter
-@AllArgsConstructor
+@RequiredArgsConstructor
 public class Employee implements Serializable {
-
   private static final long serialVersionUID = -8224860450904540019L;
 
   @NotEmpty(message = "name is required")
@@ -23,7 +26,6 @@ public class Employee implements Serializable {
 
   @Digits(integer = 3, fraction = 0, message = "invalid CVV")
   private final String ccCVV;
-
 }
 ```
 
@@ -129,6 +131,9 @@ public class GlobalExceptionHandler {
 }
 ```
 
-项目源码见[Github](https://github.com/nkcoder/spring-demo/tree/master/form-validation)
+项目源码见[springboot-form-validation](https://github.com/nkcoder/springboot-samples/tree/master/springboot-form-validation)
 
+### 参考
+
+- [Spring in Action, Fifth Edition](https://www.manning.com/books/spring-in-action-fifth-edition)
 - [Difference between @Valid and @Validated in Spring](https://stackoverflow.com/questions/36173332/difference-between-valid-and-validated-in-spring)
