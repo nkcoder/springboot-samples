@@ -1,16 +1,35 @@
 bootJar {
     archivesBaseName = 'spring-data-jpa'
-    version = '1.0'
 }
 
 dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-web'
-
     implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+
+    implementation 'org.projectlombok:lombok'
+    annotationProcessor 'org.projectlombok:lombok'
+
+    implementation 'org.flywaydb:flyway-core'
+    implementation 'mysql:mysql-connector-java:8.0.23'
+    implementation 'org.mariadb.jdbc:mariadb-java-client:2.7.2'
+    implementation 'ch.vorburger.mariaDB4j:mariaDB4j:2.4.0'
+
+    testImplementation 'io.rest-assured:rest-assured:4.3.3'
+    testImplementation 'io.rest-assured:spring-mock-mvc:4.3.3'
 
     testImplementation('org.springframework.boot:spring-boot-starter-test') {
         exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
     }
+}
 
-    runtime 'com.h2database:h2'
+sourceSets {
+    test {
+        if ('unit' == System.getProperty('mode')) {
+            java.srcDir file('src/test/java')
+            resources.srcDir file('src/test/resources')
+        } else {
+            java.srcDir file('src/test-integration/java')
+            resources.srcDir file('src/test-integration/resources')
+        }
+    }
 }

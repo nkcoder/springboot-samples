@@ -1,18 +1,14 @@
-logging.level.web: DEBUG
-
 spring:
   jpa:
-    show-sql: true
+    show-sql: false
     database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
     hibernate:
       use-new-id-generator-mappings: false
-      ddl-auto: none
   datasource:
     driver-class-name: org.mariadb.jdbc.Driver
     username: root
     hikari:
       maximum-pool-size: 10
     url: jdbc:mysql://localhost:60000/test?characterEncoding=utr8
-
   flyway:
     locations: classpath:/db/migration

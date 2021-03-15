@@ -5,5 +5,4 @@ CREATE TABLE IF NOT EXISTS `player`
     `team`    VARCHAR(32) NOT NULL,
     `join_at` DATE,
     PRIMARY KEY (`id`)
-);
-
+    );

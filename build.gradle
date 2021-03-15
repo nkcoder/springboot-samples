@@ -29,8 +29,8 @@ subprojects {
     sourceCompatibility = JavaVersion.VERSION_11
 
     repositories {
-        mavenCentral()
         maven { url "https://maven.aliyun.com/repository/central" }
+        mavenCentral()
     }
 
     configurations {
@@ -49,10 +49,6 @@ subprojects {
 
     compileJava {
         options.compilerArgs << '-parameters'
-    }
-
-    ext {
-//        guavaVersion = '28.0-jre'
     }
 
     dependencies {

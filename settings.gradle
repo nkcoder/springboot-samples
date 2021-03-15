@@ -15,4 +15,3 @@ include 'springboot-admin'
 include 'springboot-mybatis-annotation'
 include 'springboot-mybatis-xml'
 include 'springboot-scala'
-
